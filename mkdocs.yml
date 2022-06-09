@@ -1,0 +1,71 @@
+site_name: 运维手册
+site_url: https://mapan1984.github.io/ops-manual/
+repo_url: https://github.com/mapan1984/ops-manual/
+site_description: 运维手册
+site_author: mapan
+
+nav:
+  - 1. 负载: 
+    - '1-负载/index.md'
+    - 1.1 内存: '1-负载/1-memory.md'
+    - 1.2 cpu: '1-负载/2-cpu.md'
+    - 1.3 磁盘: '1-负载/3-disk.md'
+    - 1.4 网络: '1-负载/4-net.md'
+  - 2. 监控:
+    - 2.1 prometheus: '2-监控/1-prometheus.md'
+    - 2.2 promql: '2-监控/2-promql.md'
+    - 2.3 grafana: '2-监控/3-grafana.md'
+    - 2.4 exporter:
+      - '2-监控/4-exporter/index.md'
+      - 2.4.1 node_exporter:
+        - '2-监控/4-exporter/1-node_exporter/index.md'
+        - 2.4.1.1 内存: '2-监控/4-exporter/1-node_exporter/1-memory.md'
+        - 2.4.1.2 cpu: '2-监控/4-exporter/1-node_exporter/2-cpu.md'
+        - 2.4.1.3 磁盘: '2-监控/4-exporter/1-node_exporter/3-disk.md'
+      - 2.4.2 jmx_exporter:
+        - '2-监控/4-exporter/2-jmx_exporter/index.md'
+        - 2.4.2.1 jvm: '2-监控/4-exporter/2-jmx_exporter/1-jvm.md'
+        - 2.4.2.2 kafka: '2-监控/4-exporter/2-jmx_exporter/2-kafka.md'
+    - 2.5 动态配置采集目标: '2-监控/5-动态配置采集目标.md'
+    - 2.6 配置告警: '2-监控/6-配置告警.md'
+
+
+theme:
+  # name: readthedocs
+  name: material
+  language: 'zh'
+  features:
+    - navigation.expand
+    - navigation.top
+  # palette:
+  #   scheme: slate
+  #   primary: blue grey
+  #   accent: deep orange
+  palette: 
+    - scheme: default
+      primary: blue grey
+      accent: deep orange
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+    - scheme: slate 
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+
+plugins:
+  - section-index
+  - search:
+      lang:
+        - en
+        - ja
+
+extra_css: []
+
+
+markdown_extensions:
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.snippets
+  - tables
