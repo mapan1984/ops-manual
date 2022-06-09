@@ -1,0 +1,935 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="运维手册">
+      
+      
+      
+        <meta name="author" content="mapan">
+      
+      
+        <link rel="canonical" href="https://mapan1984.github.io/ops-manual/1-%E8%B4%9F%E8%BD%BD/3-disk/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.0">
+    
+    
+      
+        <title>1.3 磁盘 - 运维手册</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8b42a75e.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="deep-orange">
+  
+    
+    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+      <script>var palette=__get("__palette");if(null!==palette&&"object"==typeof palette.color)for(var key in palette.color)document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#13" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="运维手册" class="md-header__button md-logo" aria-label="运维手册" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            运维手册
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1.3 磁盘
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="deep-orange"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/mapan1984/ops-manual/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="运维手册" class="md-nav__button md-logo" aria-label="运维手册" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    运维手册
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/mapan1984/ops-manual/" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_1" type="checkbox" id="__nav_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            1. 负载
+          </a>
+        </label>
+      
+      <nav class="md-nav" aria-label="1. 负载" data-md-level="1">
+        <label class="md-nav__title" for="__nav_1">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            1. 负载
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-memory/" class="md-nav__link">
+        1.1 内存
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-cpu/" class="md-nav__link">
+        1.2 cpu
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="./" class="md-nav__link md-nav__link--active"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            1.3 磁盘
+          </a>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        1.3 磁盘
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#iostat" class="md-nav__link">
+    iostat 使用
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#procdiskstats" class="md-nav__link">
+    /proc/diskstats
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    参考
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4-net/" class="md-nav__link">
+        1.4 网络
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" data-md-state="indeterminate" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          
+            2. 监控
+          
+        </label>
+      
+      <nav class="md-nav" aria-label="2. 监控" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          
+            2. 监控
+          
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2-%E7%9B%91%E6%8E%A7/1-prometheus/" class="md-nav__link">
+        2.1 prometheus
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2-%E7%9B%91%E6%8E%A7/2-promql/" class="md-nav__link">
+        2.2 promql
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2-%E7%9B%91%E6%8E%A7/3-grafana/" class="md-nav__link">
+        2.3 grafana
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_4" data-md-state="indeterminate" type="checkbox" id="__nav_2_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../2-%E7%9B%91%E6%8E%A7/4-exporter/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            2.4 exporter
+          </a>
+        </label>
+      
+      <nav class="md-nav" aria-label="2.4 exporter" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../2-%E7%9B%91%E6%8E%A7/4-exporter/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            2.4 exporter
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_4_1" data-md-state="indeterminate" type="checkbox" id="__nav_2_4_1" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../2-%E7%9B%91%E6%8E%A7/4-exporter/1-node_exporter/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            2.4.1 node_exporter
+          </a>
+        </label>
+      
+      <nav class="md-nav" aria-label="2.4.1 node_exporter" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../2-%E7%9B%91%E6%8E%A7/4-exporter/1-node_exporter/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            2.4.1 node_exporter
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2-%E7%9B%91%E6%8E%A7/4-exporter/1-node_exporter/1-memory/" class="md-nav__link">
+        2.4.1.1 内存
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2-%E7%9B%91%E6%8E%A7/4-exporter/1-node_exporter/2-cpu/" class="md-nav__link">
+        2.4.1.2 cpu
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2-%E7%9B%91%E6%8E%A7/4-exporter/1-node_exporter/3-disk/" class="md-nav__link">
+        2.4.1.3 磁盘
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_4_2" data-md-state="indeterminate" type="checkbox" id="__nav_2_4_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../2-%E7%9B%91%E6%8E%A7/4-exporter/2-jmx_exporter/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            2.4.2 jmx_exporter
+          </a>
+        </label>
+      
+      <nav class="md-nav" aria-label="2.4.2 jmx_exporter" data-md-level="3">
+        <label class="md-nav__title" for="__nav_2_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../2-%E7%9B%91%E6%8E%A7/4-exporter/2-jmx_exporter/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            2.4.2 jmx_exporter
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2-%E7%9B%91%E6%8E%A7/4-exporter/2-jmx_exporter/1-jvm/" class="md-nav__link">
+        2.4.2.1 jvm
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2-%E7%9B%91%E6%8E%A7/4-exporter/2-jmx_exporter/2-kafka/" class="md-nav__link">
+        2.4.2.2 kafka
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2-%E7%9B%91%E6%8E%A7/5-%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E9%87%87%E9%9B%86%E7%9B%AE%E6%A0%87/" class="md-nav__link">
+        2.5 动态配置采集目标
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2-%E7%9B%91%E6%8E%A7/6-%E9%85%8D%E7%BD%AE%E5%91%8A%E8%AD%A6/" class="md-nav__link">
+        2.6 配置告警
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#iostat" class="md-nav__link">
+    iostat 使用
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#procdiskstats" class="md-nav__link">
+    /proc/diskstats
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    参考
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/mapan1984/ops-manual/edit/master/docs/1-负载/3-disk.md" title="编辑此页" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="13">1.3 磁盘</h1>
+<h2 id="iostat">iostat 使用</h2>
+<p>使用：</p>
+<div class="highlight"><pre><span></span><code>iostat [ options  ] [ &lt;interval&gt; [ &lt;count&gt;  ]  ]
+</code></pre></div>
+<p>比如间隔 2 每秒展示一次统计数据，总共展示 20 次：</p>
+<div class="highlight"><pre><span></span><code>iostat -x -p 2 20
+</code></pre></div>
+<p>参数 options 与含义：</p>
+<div class="highlight"><pre><span></span><code>-x 显示详细信息
+-p[磁盘] 显示磁盘和分区的情况
+-C 显示CPU使用情况
+-d 显示磁盘使用情况
+-k 以 KB 为单位显示
+-m 以 M 为单位显示
+-N 显示磁盘阵列(LVM) 信息
+-t 显示终端和CPU的信息
+-V 显示版本信息
+</code></pre></div>
+<ul>
+<li><code>rrqm/s</code> 和 <code>wrqm/s</code> (read request merged, write request merged)：每秒合并的读和写请求。如果请求队列中多个逻辑请求的地址位于相邻/同一个块，操作系统会将这些请求合并为一个请求到实际磁盘。一般顺序访问相比随机访问会出现更多的合并数</li>
+<li><code>r/s</code>：每秒发送到设备的读请求数（合并之后的数值）</li>
+<li><code>w/s</code>：每秒发送到设备的写请求数（合并之后的数值）</li>
+<li><code>rkB/s</code>: 每秒读数据量(kB为单位)</li>
+<li><code>wkB/s</code>: 每秒写数据量(kB为单位)</li>
+<li><code>rsec/s</code> 和 <code>wsec/s</code>：每秒读和写的扇区数（每扇区大小为512字节）</li>
+<li><code>avgrq–sz</code>：平均每次 IO 请求的扇区数</li>
+<li><code>avgqu–sz</code>：平均在设备队列中等待的 IO 请求数</li>
+<li><code>await</code>：平均每个 IO 请求花费的时间（等待时间与处理时间，单位为 ms）</li>
+<li><code>r_await</code> 和 <code>w_await</code>: 平均每个 IO 读请求与写请求的所花费的时间</li>
+<li><code>svctm</code>：平均每个 IO 请求（服务）处理时间 <strong>这项指标不可信，将被废弃</strong></li>
+<li><code>%util</code>：采集周期内有 IO 处理的时间比率，即 IO 队列非空的时间比率。这里有 IO 处理没有考虑 IO 有多少，只考虑有没有，但是一般块设备可以并发处理请求，所以单纯看这个值并不能说明设备处理是否饱和</li>
+</ul>
+<blockquote>
+<p>注意：iostat 从 /proc/diskstats 计算得到展示数，/proc/diskstats 提供的是累计值，展示的数据需要计算时间间隔前后的变化，所以 iostat 首次运行时显示自系统启动开始的各项统计信息，之后运行 iostat 将显示自上次运行该命令以后的统计信息</p>
+<p>util = (r/s+w/s) * (svctm/1000)</p>
+<p>常见 linux 的磁盘 IO 指标的缩写习惯：
+rq 是 request
+r 是 read
+w 是 write
+qu 是 queue
+sz 是 size
+a 是 average
+tm 是 time
+svc 是 service。</p>
+</blockquote>
+<h2 id="procdiskstats">/proc/diskstats</h2>
+<div class="highlight"><pre><span></span><code>$ cat /proc/diskstats
+   8       0 sda 284582428 3662549 46775621561 463232949 331115798 379042858 23932284589 1218204980 0 1137934235 1949683834
+                  1  2 3   4   5 6 7 8 9 10  11
+   8       1 sda1 22 0 176 248 0 0 0 0 0 256 256
+   8       2 sda2 31919620 529912 1308796698 168580225 3802763 484906 37468832 3650707 0 102423621 187605638
+   8       3 sda3 1903036 20859 112724155 11083792 7317913 295559 67078769 7332650 0 14976486 23037140
+   8       4 sda4 19758029 135050 2122710340 29034910 78120710 6565898 1001751842 54812811 0 81205754 132614573
+</code></pre></div>
+<p><code>/proc/diskstats</code> 有 11 个字段，除了字段 #9 之外都是累计值，从系统启动之后一直累加：</p>
+<ol>
+<li>(rd_ios)读操作的次数。</li>
+<li>(rd_merges)合并读操作的次数。如果两个读操作读取相邻的数据块时，可以被合并成一个，以提高效率。合并的操作通常是I/O scheduler（也叫elevator）负责的。</li>
+<li>(rd_sectors)读取的扇区数量。</li>
+<li>(rd_ticks)读操作消耗的时间（以毫秒为单位）。每个读操作从__make_request()开始计时，到end_that_request_last()为止，包括了在队列中等待的时间。</li>
+<li>(wr_ios)写操作的次数。</li>
+<li>(wr_merges)合并写操作的次数。</li>
+<li>(wr_sectors)写入的扇区数量。</li>
+<li>(wr_ticks)写操作消耗的时间（以毫秒为单位）。</li>
+<li>(in_flight)当前未完成的I/O数量。在I/O请求进入队列时该值加1，在I/O结束时该值减1。注意：是I/O请求进入队列时，而不是提交给硬盘设备时。</li>
+<li>(io_ticks)该设备用于处理I/O的自然时间(wall-clock time)。</li>
+<li>请注意io_ticks与rd_ticks(字段#4)和wr_ticks(字段#8)的区别，rd_ticks和wr_ticks是把每一个I/O所消耗的时间累加在一起，因为硬盘设备通常可以并行处理多个I/O，所以rd_ticks和wr_ticks往往会比自然时间大。而io_ticks表示该设备有I/O（即非空闲）的时间，不考虑I/O有多少，只考虑有没有。在实际计算时，字段#9(in_flight)不为零的时候io_ticks保持计时，字段#9(in_flight)为零的时候io_ticks停止计时。</li>
+<li>(time_in_queue)对字段#10(io_ticks)的加权值。字段#10(io_ticks)是自然时间，不考虑当前有几个I/O，而time_in_queue是用当前的I/O数量（即字段#9 in-flight）乘以自然时间。虽然该字段的名称是time_in_queue，但并不真的只是在队列中的时间，其中还包含了硬盘处理I/O的时间。iostat在计算avgqu-sz时会用到这个字段。</li>
+</ol>
+<p>监控项：</p>
+<ol>
+<li>每秒读 io 次数：r/s = Δrd_ios/Δt</li>
+<li>每秒写 io 次数：w/s = Δwr_ios/Δt</li>
+<li>每个读操作平均所需的时间: r_await = Δrd_ticks/Δrd_ios
+    &gt; 不仅包括硬盘设备读操作的时间，还包括了在kernel队列中等待的时间。</li>
+<li>每个写操作平均所需的时间: w_await = Δwr_ticks/Δwr_ios
+    &gt; 不仅包括硬盘设备写操作的时间，还包括了在kernel队列中等待的时间。</li>
+<li>该硬盘设备的繁忙比率: %util = Δio_ticks/Δt
+    &gt; 表示该设备有I/O（即非空闲）的时间比率，不考虑I/O有多少，只考虑有没有。</li>
+</ol>
+<h2 id="_1">参考</h2>
+<ul>
+<li>容易被误读的IOSTAT: http://linuxperf.com/?p=156</li>
+<li>https://blog.csdn.net/MrSate/article/details/104421383</li>
+<li>https://tech.meituan.com/2017/05/19/about-desk-io.html</li>
+</ul>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            Back to top
+          </a>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="../2-cpu/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 1.2 cpu" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              1.2 cpu
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../4-net/" class="md-footer__link md-footer__link--next" aria-label="下一页: 1.4 网络" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              1.4 网络
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        
+          Made with
+          <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+            Material for MkDocs
+          </a>
+        
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand", "navigation.top"], "translations": {"clipboard.copy": "\u590d\u5236", "clipboard.copied": "\u5df2\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.f8263e09.min.js", "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.4fc53ad4.min.js"></script>
+      
+    
+  </body>
+</html>
