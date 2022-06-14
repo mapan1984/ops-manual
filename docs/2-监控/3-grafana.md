@@ -27,3 +27,6 @@ grafana 可以获取 prometheus 数据，提供监控图表。
 
 管理脚本：/etc/init.d/grafana-server
 
+## 数据
+
+granfana 数据目录：/var/lib/grafana

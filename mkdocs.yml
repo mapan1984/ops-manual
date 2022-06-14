@@ -25,7 +25,11 @@ nav:
       - 2.4.2 jmx_exporter:
         - '2-监控/4-exporter/2-jmx_exporter/index.md'
         - 2.4.2.1 jvm: '2-监控/4-exporter/2-jmx_exporter/1-jvm.md'
-        - 2.4.2.2 kafka: '2-监控/4-exporter/2-jmx_exporter/2-kafka.md'
+        - 2.4.2.2 kafka:
+          - '2-监控/4-exporter/2-jmx_exporter/2-kafka/index.md'
+          - 2.4.2.2.1 启动方式: '2-监控/4-exporter/2-jmx_exporter/2-kafka/1-启动方式.md'
+          - 2.4.2.2.2 监控项: '2-监控/4-exporter/2-jmx_exporter/2-kafka/2-监控项.md'
+          - 2.4.2.2.3 rules 配置: '2-监控/4-exporter/2-jmx_exporter/2-kafka/3-rules配置.md'
     - 2.5 动态配置采集目标: '2-监控/5-动态配置采集目标.md'
     - 2.6 配置告警: '2-监控/6-配置告警.md'
 

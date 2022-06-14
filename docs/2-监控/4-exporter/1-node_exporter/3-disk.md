@@ -26,6 +26,12 @@
 
 ### %util
 
+磁盘发生 io 时间的累计值，Counter 类型
+
+    node_disk_io_time_seconds_total
+
+磁盘使用率 %util （即单位时间内磁盘发生 io 时间占比）
+
     rate(node_disk_io_time_seconds_total{}[5m])
 
 ### avgqu-sz
