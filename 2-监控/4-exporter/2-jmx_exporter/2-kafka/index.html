@@ -588,15 +588,16 @@
     
   
   
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_4_2_2" type="checkbox" id="__nav_2_4_2_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4_2_2">
           <span class="md-nav__icon md-icon"></span>
           
             <a href="./" class="md-nav__link md-nav__link--active"
@@ -606,42 +607,62 @@
           </a>
         </label>
       
-      <a href="./" class="md-nav__link md-nav__link--active">
-        2.4.2.2 kafka
+      <nav class="md-nav" aria-label="2.4.2.2 kafka" data-md-level="4">
+        <label class="md-nav__title" for="__nav_2_4_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="./" class="md-nav__link md-nav__link--active"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            2.4.2.2 kafka
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="1-%E5%90%AF%E5%8A%A8%E6%96%B9%E5%BC%8F/" class="md-nav__link">
+        2.4.2.2.1 启动方式
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="目录">
+    </li>
+  
+
+            
+          
+            
+              
   
   
   
-    
+    <li class="md-nav__item">
+      <a href="2-%E7%9B%91%E6%8E%A7%E9%A1%B9/" class="md-nav__link">
+        2.4.2.2.2 监控项
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#javaagent" class="md-nav__link">
-    以 javaagent 的方式启动
-  </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#rules" class="md-nav__link">
-    rules 设置
-  </a>
+    <li class="md-nav__item">
+      <a href="3-rules%E9%85%8D%E7%BD%AE/" class="md-nav__link">
+        2.4.2.2.3 rules 配置
+      </a>
+    </li>
   
-</li>
-      
-    </ul>
-  
-</nav>
-      
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -714,28 +735,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#javaagent" class="md-nav__link">
-    以 javaagent 的方式启动
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#rules" class="md-nav__link">
-    rules 设置
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -746,131 +745,12 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/mapan1984/ops-manual/edit/master/docs/2-监控/4-exporter/2-jmx_exporter/2-kafka.md" title="编辑此页" class="md-content__button md-icon">
+                  <a href="https://github.com/mapan1984/ops-manual/edit/master/docs/2-监控/4-exporter/2-jmx_exporter/2-kafka/index.md" title="编辑此页" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
                 <h1 id="2422-jmx_exporter-kafka">2.4.2.2 使用 jmx_exporter 采集 kafka 监控</h1>
-<h2 id="javaagent">以 javaagent 的方式启动</h2>
-<p>修改 kafka 的 <code>kafka-run-class.sh</code> 文件，增加 <code>javaagent</code> 配置：</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># ...</span>
-
-<span class="k">if</span> <span class="o">[[</span> <span class="nv">$JMX_PORT</span> <span class="o">&amp;&amp;</span> -f /usr/local/jmx_prometheus_javaagent-0.16.1.jar <span class="o">&amp;&amp;</span> -f /etc/default/jmx_prometheus_javaagent.yaml <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
-  <span class="nv">JMX_EXPORTER</span><span class="o">=</span>-javaagent:/usr/local/jmx_prometheus_javaagent-0.16.1.jar<span class="o">=</span><span class="m">5556</span>:/etc/default/jmx_prometheus_javaagent.yaml
-<span class="k">else</span>
-  <span class="nv">JMX_EXPORTER</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
-<span class="k">fi</span>
-
-<span class="c1"># ...</span>
-
-<span class="c1"># Launch mode</span>
-<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;x</span><span class="nv">$DAEMON_MODE</span><span class="s2">&quot;</span> <span class="o">=</span> <span class="s2">&quot;xtrue&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-  nohup <span class="nv">$JAVA</span> <span class="nv">$KAFKA_HEAP_OPTS</span> <span class="nv">$KAFKA_JVM_PERFORMANCE_OPTS</span> <span class="nv">$KAFKA_GC_LOG_OPTS</span> <span class="nv">$KAFKA_JMX_OPTS</span> <span class="nv">$KAFKA_LOG4J_OPTS</span> <span class="nv">$JMX_EXPORTER</span> -cp <span class="nv">$CLASSPATH</span> <span class="nv">$KAFKA_OPTS</span> <span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span> &gt; <span class="s2">&quot;</span><span class="nv">$CONSOLE_OUTPUT_FILE</span><span class="s2">&quot;</span> <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> &lt; /dev/null <span class="p">&amp;</span>
-<span class="k">else</span>
-  <span class="nb">exec</span>  <span class="nv">$JAVA</span> <span class="nv">$KAFKA_HEAP_OPTS</span> <span class="nv">$KAFKA_JVM_PERFORMANCE_OPTS</span> <span class="nv">$KAFKA_GC_LOG_OPTS</span> <span class="nv">$KAFKA_JMX_OPTS</span> <span class="nv">$KAFKA_LOG4J_OPTS</span> <span class="nv">$JMX_EXPORTER</span> -cp <span class="nv">$CLASSPATH</span> <span class="nv">$KAFKA_OPTS</span> <span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
-<span class="k">fi</span>
-</code></pre></div>
-<p>增加 <code>javaagent</code> 配置后可以从 5556 端口获取 jmx metrics：</p>
-<div class="highlight"><pre><span></span><code>$ curl http://localhost:5556/metrics
-</code></pre></div>
-<p>修改 <code>prometheus.yml</code>，增加 job：</p>
-<div class="highlight"><pre><span></span><code><span class="nt">scrape_configs</span><span class="p">:</span>
-  <span class="p p-Indicator">-</span> <span class="nt">job_name</span><span class="p">:</span> <span class="s">&#39;kafka1&#39;</span>
-    <span class="nt">static_configs</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="nt">targets</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;10.9.164.4:5556&#39;</span><span class="p p-Indicator">]</span>
-  <span class="p p-Indicator">-</span> <span class="nt">job_name</span><span class="p">:</span> <span class="s">&#39;kafka2&#39;</span>
-    <span class="nt">static_configs</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="nt">targets</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;10.9.140.204:5556&#39;</span><span class="p p-Indicator">]</span>
-  <span class="p p-Indicator">-</span> <span class="nt">job_name</span><span class="p">:</span> <span class="s">&#39;kafka3&#39;</span>
-    <span class="nt">static_configs</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="nt">targets</span><span class="p">:</span> <span class="p p-Indicator">[</span><span class="s">&#39;10.9.145.115:5556&#39;</span><span class="p p-Indicator">]</span>
-</code></pre></div>
-<h2 id="rules">rules 设置</h2>
-<div class="highlight"><pre><span></span><code><span class="nt">rules</span><span class="p">:</span>
-  <span class="c1"># Special cases and very specific rules</span>
-  <span class="p p-Indicator">-</span> <span class="nt">pattern </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kafka.server&lt;type=(.+), name=(.+), clientId=(.+), topic=(.+), partition=(.*)&gt;&lt;&gt;Value</span>
-    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kafka_server_$1_$2</span>
-    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">GAUGE</span>
-    <span class="nt">labels</span><span class="p">:</span>
-      <span class="nt">clientId</span><span class="p">:</span> <span class="s">&quot;$3&quot;</span>
-      <span class="nt">topic</span><span class="p">:</span> <span class="s">&quot;$4&quot;</span>
-      <span class="nt">partition</span><span class="p">:</span> <span class="s">&quot;$5&quot;</span>
-  <span class="p p-Indicator">-</span> <span class="nt">pattern </span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kafka.server&lt;type=(.+), name=(.+), clientId=(.+), brokerHost=(.+), brokerPort=(.+)&gt;&lt;&gt;Value</span>
-    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kafka_server_$1_$2</span>
-    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">GAUGE</span>
-    <span class="nt">labels</span><span class="p">:</span>
-      <span class="nt">clientId</span><span class="p">:</span> <span class="s">&quot;$3&quot;</span>
-      <span class="nt">broker</span><span class="p">:</span> <span class="s">&quot;$4:$5&quot;</span>
-
-  <span class="c1"># Generic per-second counters with 0-2 key/value pairs</span>
-  <span class="p p-Indicator">-</span> <span class="nt">pattern</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kafka.(\w+)&lt;type=(.+), name=(.+)PerSec\w*, (.+)=(.+), (.+)=(.+)&gt;&lt;&gt;Count</span>
-    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kafka_$1_$2_$3_total</span>
-    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">COUNTER</span>
-    <span class="nt">labels</span><span class="p">:</span>
-      <span class="s">&quot;$4&quot;</span><span class="p p-Indicator">:</span> <span class="s">&quot;$5&quot;</span>
-      <span class="s">&quot;$6&quot;</span><span class="p p-Indicator">:</span> <span class="s">&quot;$7&quot;</span>
-  <span class="p p-Indicator">-</span> <span class="nt">pattern</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kafka.(\w+)&lt;type=(.+), name=(.+)PerSec\w*, (.+)=(.+)&gt;&lt;&gt;Count</span>
-    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kafka_$1_$2_$3_total</span>
-    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">COUNTER</span>
-    <span class="nt">labels</span><span class="p">:</span>
-      <span class="s">&quot;$4&quot;</span><span class="p p-Indicator">:</span> <span class="s">&quot;$5&quot;</span>
-  <span class="p p-Indicator">-</span> <span class="nt">pattern</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kafka.(\w+)&lt;type=(.+), name=(.+)PerSec\w*&gt;&lt;&gt;Count</span>
-    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kafka_$1_$2_$3_total</span>
-    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">COUNTER</span>
-
-  <span class="c1"># Generic gauges with 0-2 key/value pairs</span>
-  <span class="p p-Indicator">-</span> <span class="nt">pattern</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kafka.(\w+)&lt;type=(.+), name=(.+), (.+)=(.+), (.+)=(.+)&gt;&lt;&gt;Value</span>
-    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kafka_$1_$2_$3</span>
-    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">GAUGE</span>
-    <span class="nt">labels</span><span class="p">:</span>
-      <span class="s">&quot;$4&quot;</span><span class="p p-Indicator">:</span> <span class="s">&quot;$5&quot;</span>
-      <span class="s">&quot;$6&quot;</span><span class="p p-Indicator">:</span> <span class="s">&quot;$7&quot;</span>
-  <span class="p p-Indicator">-</span> <span class="nt">pattern</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kafka.(\w+)&lt;type=(.+), name=(.+), (.+)=(.+)&gt;&lt;&gt;Value</span>
-    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kafka_$1_$2_$3</span>
-    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">GAUGE</span>
-    <span class="nt">labels</span><span class="p">:</span>
-      <span class="s">&quot;$4&quot;</span><span class="p p-Indicator">:</span> <span class="s">&quot;$5&quot;</span>
-  <span class="p p-Indicator">-</span> <span class="nt">pattern</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kafka.(\w+)&lt;type=(.+), name=(.+)&gt;&lt;&gt;Value</span>
-    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kafka_$1_$2_$3</span>
-    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">GAUGE</span>
-
-  <span class="c1"># Emulate Prometheus &#39;Summary&#39; metrics for the exported &#39;Histogram&#39;s.</span>
-  <span class="c1">#</span>
-  <span class="c1"># Note that these are missing the &#39;_sum&#39; metric!</span>
-  <span class="p p-Indicator">-</span> <span class="nt">pattern</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kafka.(\w+)&lt;type=(.+), name=(.+), (.+)=(.+), (.+)=(.+)&gt;&lt;&gt;Count</span>
-    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kafka_$1_$2_$3_count</span>
-    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">COUNTER</span>
-    <span class="nt">labels</span><span class="p">:</span>
-      <span class="s">&quot;$4&quot;</span><span class="p p-Indicator">:</span> <span class="s">&quot;$5&quot;</span>
-      <span class="s">&quot;$6&quot;</span><span class="p p-Indicator">:</span> <span class="s">&quot;$7&quot;</span>
-  <span class="p p-Indicator">-</span> <span class="nt">pattern</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kafka.(\w+)&lt;type=(.+), name=(.+), (.+)=(.*), (.+)=(.+)&gt;&lt;&gt;(\d+)thPercentile</span>
-    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kafka_$1_$2_$3</span>
-    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">GAUGE</span>
-    <span class="nt">labels</span><span class="p">:</span>
-      <span class="s">&quot;$4&quot;</span><span class="p p-Indicator">:</span> <span class="s">&quot;$5&quot;</span>
-      <span class="s">&quot;$6&quot;</span><span class="p p-Indicator">:</span> <span class="s">&quot;$7&quot;</span>
-      <span class="nt">quantile</span><span class="p">:</span> <span class="s">&quot;0.$8&quot;</span>
-  <span class="p p-Indicator">-</span> <span class="nt">pattern</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kafka.(\w+)&lt;type=(.+), name=(.+), (.+)=(.+)&gt;&lt;&gt;Count</span>
-    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kafka_$1_$2_$3_count</span>
-    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">COUNTER</span>
-    <span class="nt">labels</span><span class="p">:</span>
-      <span class="s">&quot;$4&quot;</span><span class="p p-Indicator">:</span> <span class="s">&quot;$5&quot;</span>
-  <span class="p p-Indicator">-</span> <span class="nt">pattern</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kafka.(\w+)&lt;type=(.+), name=(.+), (.+)=(.*)&gt;&lt;&gt;(\d+)thPercentile</span>
-    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kafka_$1_$2_$3</span>
-    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">GAUGE</span>
-    <span class="nt">labels</span><span class="p">:</span>
-      <span class="s">&quot;$4&quot;</span><span class="p p-Indicator">:</span> <span class="s">&quot;$5&quot;</span>
-      <span class="nt">quantile</span><span class="p">:</span> <span class="s">&quot;0.$6&quot;</span>
-  <span class="p p-Indicator">-</span> <span class="nt">pattern</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kafka.(\w+)&lt;type=(.+), name=(.+)&gt;&lt;&gt;Count</span>
-    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kafka_$1_$2_$3_count</span>
-    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">COUNTER</span>
-  <span class="p p-Indicator">-</span> <span class="nt">pattern</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kafka.(\w+)&lt;type=(.+), name=(.+)&gt;&lt;&gt;(\d+)thPercentile</span>
-    <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">kafka_$1_$2_$3</span>
-    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">GAUGE</span>
-    <span class="nt">labels</span><span class="p">:</span>
-      <span class="nt">quantile</span><span class="p">:</span> <span class="s">&quot;0.$4&quot;</span>
-</code></pre></div>
                 
               
               
@@ -911,13 +791,13 @@
       
       
         
-        <a href="../../../5-%E5%8A%A8%E6%80%81%E9%85%8D%E7%BD%AE%E9%87%87%E9%9B%86%E7%9B%AE%E6%A0%87/" class="md-footer__link md-footer__link--next" aria-label="下一页: 2.5 动态配置采集目标" rel="next">
+        <a href="1-%E5%90%AF%E5%8A%A8%E6%96%B9%E5%BC%8F/" class="md-footer__link md-footer__link--next" aria-label="下一页: 2.4.2.2.1 启动方式" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 下一页
               </span>
-              2.5 动态配置采集目标
+              2.4.2.2.1 启动方式
             </div>
           </div>
           <div class="md-footer__button md-icon">

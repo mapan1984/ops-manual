@@ -285,9 +285,58 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="./" class="md-nav__link md-nav__link--active"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            1.1 内存
+          </a>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         1.1 内存
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#free" class="md-nav__link">
+    free 解释
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#page_cache" class="md-nav__link">
+    page_cache
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cache" class="md-nav__link">
+    清除 cache
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -592,10 +641,81 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_4_2_2" data-md-state="indeterminate" type="checkbox" id="__nav_2_4_2_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../2-%E7%9B%91%E6%8E%A7/4-exporter/2-jmx_exporter/2-kafka/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            2.4.2.2 kafka
+          </a>
+        </label>
+      
+      <nav class="md-nav" aria-label="2.4.2.2 kafka" data-md-level="4">
+        <label class="md-nav__title" for="__nav_2_4_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../../2-%E7%9B%91%E6%8E%A7/4-exporter/2-jmx_exporter/2-kafka/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            2.4.2.2 kafka
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../../2-%E7%9B%91%E6%8E%A7/4-exporter/2-jmx_exporter/2-kafka/" class="md-nav__link">
-        2.4.2.2 kafka
+      <a href="../../2-%E7%9B%91%E6%8E%A7/4-exporter/2-jmx_exporter/2-kafka/1-%E5%90%AF%E5%8A%A8%E6%96%B9%E5%BC%8F/" class="md-nav__link">
+        2.4.2.2.1 启动方式
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2-%E7%9B%91%E6%8E%A7/4-exporter/2-jmx_exporter/2-kafka/2-%E7%9B%91%E6%8E%A7%E9%A1%B9/" class="md-nav__link">
+        2.4.2.2.2 监控项
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2-%E7%9B%91%E6%8E%A7/4-exporter/2-jmx_exporter/2-kafka/3-rules%E9%85%8D%E7%BD%AE/" class="md-nav__link">
+        2.4.2.2.3 rules 配置
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -668,6 +788,35 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#free" class="md-nav__link">
+    free 解释
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#page_cache" class="md-nav__link">
+    page_cache
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cache" class="md-nav__link">
+    清除 cache
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -684,6 +833,88 @@
                 
                 
                 <h1 id="11">1.1 内存</h1>
+<p>参考：https://mapan1984.github.io/manual/2019/04/28/linux-运维问题/#free-解释</p>
+<h3 id="free">free 解释</h3>
+<div class="highlight"><pre><span></span><code>$ free -g
+             total       used       free     shared    buffers     cached
+Mem:           125        122          3          0          0         99
+-/+ buffers/cache:         22        102
+Swap:            0          0          0
+</code></pre></div>
+<ul>
+<li><code>total</code>: 总内存大小</li>
+<li><code>used</code>: 已经使用的内存</li>
+<li><code>free</code>: 空闲的内存</li>
+<li><code>shared</code>: 多个进程共享的内存总额</li>
+<li><code>buffers</code>: 块缓存(buffer cache)大小，缓存块设备的块数据（如磁盘）</li>
+<li><code>cached</code>: 页缓存(page cache)大小，缓存文件的页数据</li>
+<li><code>-buffers/cache</code>: 已用的内存数，不包含磁盘缓存，<code>used - buffers - cached</code></li>
+<li><code>+buffers/cache</code>: 可用的内存数，包含磁盘缓存，<code>free + buffers + cached</code></li>
+</ul>
+<p>这里的 <code>buffers</code>, <code>cached</code> 是磁盘缓存，这部分内存也可以被进程申请到，所以计算可用的内存时，应该用 <code>+buffers/cache</code>，即 <code>free + buffers + cached</code></p>
+<p>实际被进程占用的内存，应该去除磁盘缓存，即 <code>-buffers/cache</code>，即 <code>used - buffers - cached</code></p>
+<blockquote>
+<p>在 Linux 2.4 版本的内核之前，page cache 与 buffer cache 是完全分离的。但是，块设备大多是磁盘，磁盘上的数据又大多通过文件系统来组织，这种设计导致很多数据被缓存了两次，浪费内存。所以在 2.4 版本内核之后，两块缓存近似融合在了一起：如果一个文件的页加载到了 page cache，那么同时 buffer cache 只需要维护块指向页的指针就可以了。只有那些没有文件表示的块，或者绕过了文件系统直接操作（如dd命令）的块，才会真正放到 buffer cache 里。因此，我们现在提起 page cache，基本上都同时指 page cache 和 buffer cache 两者。</p>
+</blockquote>
+<h3 id="page_cache">page_cache</h3>
+<p>linux 使用 page cache 增加对磁盘访问的性能，page cache 在内存中缓存了磁盘上的部分数据。</p>
+<ol>
+<li>对读请求，系统首先会检查所读页面是否在 cache 中:<ol>
+<li>如果在 cache 中，那么直接从内存中读取，不需要访问磁盘。</li>
+<li>如果不在 cache 中，那么从磁盘中读取所请求的页面，并 <strong>预读</strong> 几个相邻的页面（局部性原理），缓存在 cache 中。</li>
+</ol>
+</li>
+<li>对写请求，数据直接写入 cache，磁盘内容不会直接更新（断电有丢失数据风险）写入的 page 被标记为 dirty，内核会周期的将 dirty page <strong>写回</strong> 磁盘。</li>
+</ol>
+<p>相关参数：</p>
+<div class="highlight"><pre><span></span><code># dirty page 大小达到多少字节后开始触发刷磁盘
+vm.dirty_background_bytes = 0
+
+# dirty page 内存占比超过 dirty_background_ratio 后开始触发刷磁盘（默认 10%）
+vm.dirty_background_ratio = 10
+
+# dirty page 大小达到多少字节后停止接收写请求，开始触发刷磁盘
+vm.dirty_bytes = 0
+
+# dirty page 内存占比超过 dirty_ratio 后停止接收写请求，开始触发刷磁盘（默认 30%）
+vm.dirty_ratio = 30
+
+# 存在时间超过 dirty_expire_centisecs 的 dirty page 会被周期性刷盘操作写会磁盘（默认 30秒）
+vm.dirty_expire_centisecs = 3000
+
+# 多长时间唤醒一次周期性的刷盘操作（默认 5秒）
+vm.dirty_writeback_centisecs = 500
+</code></pre></div>
+<h3 id="cache">清除 cache</h3>
+<p>仅清除页面缓存（PageCache）</p>
+<div class="highlight"><pre><span></span><code>$ sync; echo 1 &gt; /proc/sys/vm/drop_caches
+</code></pre></div>
+<p>清除目录项和inode</p>
+<div class="highlight"><pre><span></span><code>$ sync; echo 2 &gt; /proc/sys/vm/drop_caches
+</code></pre></div>
+<p>清除页面缓存，目录项和inode</p>
+<div class="highlight"><pre><span></span><code>$ sync; echo 3 &gt; /proc/sys/vm/drop_caches
+</code></pre></div>
+<p>当内存小于 90G 时自动清理：</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+
+<span class="c1">#</span>
+<span class="c1"># /etc/cron.hourly/drop_caches.sh</span>
+<span class="c1">#</span>
+
+<span class="nv">free_mem</span><span class="o">=</span><span class="k">$(</span>free -g <span class="p">|</span> awk <span class="s1">&#39;/^Mem/ {print $4}&#39;</span><span class="k">)</span>
+<span class="nb">echo</span> <span class="s2">&quot;</span><span class="k">$(</span>date +<span class="s2">&quot;%Y-%m-%d-%T&quot;</span><span class="k">)</span><span class="s2"> - before free_mem: </span><span class="nv">$free_mem</span><span class="s2">&quot;</span> &gt;&gt; /root/drop_caches.log <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+
+<span class="k">if</span> <span class="o">[[</span> free_mem -lt <span class="m">90</span> <span class="o">]]</span><span class="p">;</span> <span class="k">then</span>
+  <span class="nb">echo</span> <span class="s2">&quot;</span><span class="k">$(</span>date +<span class="s2">&quot;%Y-%m-%d-%T&quot;</span><span class="k">)</span><span class="s2"> - drop caches&quot;</span> &gt;&gt; /root/drop_caches.log <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+  sync<span class="p">;</span> <span class="nb">echo</span> <span class="m">1</span> &gt; /proc/sys/vm/drop_caches
+<span class="k">else</span>
+  <span class="nb">echo</span> <span class="s2">&quot;</span><span class="k">$(</span>date +<span class="s2">&quot;%Y-%m-%d-%T&quot;</span><span class="k">)</span><span class="s2"> - do  nothing&quot;</span> &gt;&gt; /root/drop_caches.log <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="nv">free_mem</span><span class="o">=</span><span class="k">$(</span>free -g <span class="p">|</span> awk <span class="s1">&#39;/^Mem/ {print $4}&#39;</span><span class="k">)</span>
+<span class="nb">echo</span> <span class="s2">&quot;</span><span class="k">$(</span>date +<span class="s2">&quot;%Y-%m-%d-%T&quot;</span><span class="k">)</span><span class="s2"> -  after free_mem: </span><span class="nv">$free_mem</span><span class="s2">&quot;</span> &gt;&gt; /root/drop_caches.log <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+</code></pre></div>
                 
               
               

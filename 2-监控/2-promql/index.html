@@ -519,6 +519,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#irate" class="md-nav__link">
+    irate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#increase" class="md-nav__link">
     increase
   </a>
@@ -743,10 +750,81 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_4_2_2" data-md-state="indeterminate" type="checkbox" id="__nav_2_4_2_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2_4_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../4-exporter/2-jmx_exporter/2-kafka/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            2.4.2.2 kafka
+          </a>
+        </label>
+      
+      <nav class="md-nav" aria-label="2.4.2.2 kafka" data-md-level="4">
+        <label class="md-nav__title" for="__nav_2_4_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          
+            <a href="../4-exporter/2-jmx_exporter/2-kafka/" class="md-nav__link"
+              style="margin: initial; padding: initial; pointer-events: initial">
+          
+            2.4.2.2 kafka
+          </a>
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
-      <a href="../4-exporter/2-jmx_exporter/2-kafka/" class="md-nav__link">
-        2.4.2.2 kafka
+      <a href="../4-exporter/2-jmx_exporter/2-kafka/1-%E5%90%AF%E5%8A%A8%E6%96%B9%E5%BC%8F/" class="md-nav__link">
+        2.4.2.2.1 启动方式
       </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4-exporter/2-jmx_exporter/2-kafka/2-%E7%9B%91%E6%8E%A7%E9%A1%B9/" class="md-nav__link">
+        2.4.2.2.2 监控项
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4-exporter/2-jmx_exporter/2-kafka/3-rules%E9%85%8D%E7%BD%AE/" class="md-nav__link">
+        2.4.2.2.3 rules 配置
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -918,6 +996,13 @@
           <li class="md-nav__item">
   <a href="#rate" class="md-nav__link">
     rate
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#irate" class="md-nav__link">
+    irate
   </a>
   
 </li>
@@ -1100,6 +1185,10 @@ http_request_total{}[5m] # 区间向量表达式，选择以当前时间为基�
 <div class="highlight"><pre><span></span><code>rate(node_disk_io_time_seconds_total{device=&quot;vdb&quot;}[5m])
 </code></pre></div>
 <p>以 5 分钟为区间，计算区间内花费在磁盘 io 的时间的增长速率，增长速率相当于单位时间花费在磁盘 io 的时间的增长量，同样相当于单位时间内花费在磁盘 io 的占比，也即磁盘使用率 <code>%util</code></p>
+<h3 id="irate">irate</h3>
+<p><code>irate</code> 类似 <code>rate</code>，也作用于区间向量，得到区间内样本值的增长速率。</p>
+<p>区别在于，<code>irate</code> 计算增长值时会在时间区间内取最近两个 2 个样本计算速率，而 <code>rate</code> 会取时间区间内所有样本计算出一组速率取平均值。</p>
+<p>因此，当时间区间较大时，<code>rate</code> 的曲线比 <code>irate</code> 更加平滑，当时间区间逐渐缩小时，<code>rate</code> 的曲线会逐渐逼进 <code>irate</code> 的曲线。</p>
 <h3 id="increase">increase</h3>
 <p><code>increase()</code> 作用于区间向量，获取区间中的第一个样本值和最后一个样本值之间的增长量。</p>
 <h3 id="topk">topk</h3>
