@@ -1,5 +1,12 @@
 # 1.1 内存
 
+## /proc/meminfo
+
+    Memory Used = MemTotal - MemFree - Buffers - Cached
+
+    Memory Usege (%) = MemTotal - MemFree - Buffers - Cached / MemTotal
+
+
 参考：https://mapan1984.github.io/manual/2019/04/28/linux-运维问题/#free-解释
 
 ### free 解释
