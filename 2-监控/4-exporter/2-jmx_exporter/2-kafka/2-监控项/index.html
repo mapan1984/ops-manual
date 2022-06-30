@@ -1107,13 +1107,22 @@ kafka.server:type=BrokerTopicMetrics,name=TotalProduceRequestsPerSec
 <h2 id="leader">leader 数量</h2>
 <div class="highlight"><pre><span></span><code>kafka.server:type=ReplicaManager,name=LeaderCount
 </code></pre></div>
+<blockquote>
+<p>kafka_server_ReplicaManager_Value{name="LeaderCount"}</p>
+</blockquote>
 <h2 id="_8">分区数量</h2>
 <div class="highlight"><pre><span></span><code>kafka.server:type=ReplicaManager,name=PartitionCount
 </code></pre></div>
+<blockquote>
+<p>kafka_server_ReplicaManager_Value{name="PartitionCount"}</p>
+</blockquote>
 <h2 id="_9">有落后副本的分区数量</h2>
 <p><code>|isr| &lt; |all replicas|</code> 的 partition 数</p>
 <div class="highlight"><pre><span></span><code>kafka.server:type=ReplicaManager,name=UnderReplicatedPartitions
 </code></pre></div>
+<blockquote>
+<p>kafka_server_ReplicaManager_Value{name="UnderReplicatedPartitions"}</p>
+</blockquote>
 <p><code>|isr| = min.insync.replicas</code> 的 partition 数</p>
 <div class="highlight"><pre><span></span><code>kafka.server:type=ReplicaManager,name=AtMinIsrPartitionCount
 </code></pre></div>

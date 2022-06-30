@@ -328,6 +328,41 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#cpu-load" class="md-nav__link">
+    CPU Load
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cpu-usage" class="md-nav__link">
+    CPU Usage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cpu" class="md-nav__link">
+    查看 CPU 信息
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uptime" class="md-nav__link">
+    uptime 输出解释
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vmstat" class="md-nav__link">
+    vmstat 使用
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#top" class="md-nav__link">
     top 输出解释
   </a>
@@ -335,8 +370,42 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#procstat" class="md-nav__link">
+    /proc/stat
+  </a>
+  
+    <nav class="md-nav" aria-label="/proc/stat">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cpu_1" class="md-nav__link">
+    cpu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cpu_2" class="md-nav__link">
+    计算 CPU 使用率
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
-    参考：
+    其他行含义
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    参考
   </a>
   
 </li>
@@ -788,6 +857,41 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#cpu-load" class="md-nav__link">
+    CPU Load
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cpu-usage" class="md-nav__link">
+    CPU Usage
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cpu" class="md-nav__link">
+    查看 CPU 信息
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#uptime" class="md-nav__link">
+    uptime 输出解释
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vmstat" class="md-nav__link">
+    vmstat 使用
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#top" class="md-nav__link">
     top 输出解释
   </a>
@@ -795,8 +899,42 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#procstat" class="md-nav__link">
+    /proc/stat
+  </a>
+  
+    <nav class="md-nav" aria-label="/proc/stat">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#cpu_1" class="md-nav__link">
+    cpu
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cpu_2" class="md-nav__link">
+    计算 CPU 使用率
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
-    参考：
+    其他行含义
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    参考
   </a>
   
 </li>
@@ -819,26 +957,57 @@
                 
                 
                 <h1 id="12-cpu">1.2 CPU</h1>
+<h2 id="cpu-load">CPU Load</h2>
+<p>CPU 负载是指正在使用和等待使用 CPU 的进程数。</p>
+<p>对于单核处理器，如果 CPU 负载小于 1，意味着每个进程都能被及时处理，如果大于 1，意味着 CPU 满负荷，且有部分进程正处于等待状态，不能被及时处理。</p>
+<p>对于多核处理器，比如 n 核，每个 CPU 满负荷处理时系统负载为 n，系统负载超过 n，意味着有进程不能被及时处理。</p>
+<h2 id="cpu-usage">CPU Usage</h2>
+<p>CPU 使用率是指单位时间内 CPU 工作时间的占比。</p>
+<h2 id="cpu">查看 CPU 信息</h2>
+<div class="highlight"><pre><span></span><code>$ cat /proc/cpuinfo
+</code></pre></div>
+<h2 id="uptime">uptime 输出解释</h2>
+<div class="highlight"><pre><span></span><code>$ uptime
+ 16:58:33 up  2:07,  1 user,  load average: 2.76, 1.78, 1.46
+</code></pre></div>
+<p>表示系统在 1, 5, 15 分钟内的平均工作负载分别为 2.76, 1.78, 1.46。</p>
+<h2 id="vmstat">vmstat 使用</h2>
+<p>使用：</p>
+<div class="highlight"><pre><span></span><code>vmstat [&lt;interval&gt; [&lt;count&gt;]]
+</code></pre></div>
+<p>比如每隔 1 秒展示一次统计数据，总共展示 2 次：</p>
+<div class="highlight"><pre><span></span><code>$ vmstat 1 2
+procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+ 6  0      0 4081200  46644 980480    0    0     9    20  559  431 15  8 77  0  0
+ 8  0      0 4082736  46644 980480    0    0     0     0 65887 21435 17 11 72  0  0
+</code></pre></div>
+<p>输出上一秒内的 CPU 使用率</p>
+<div class="highlight"><pre><span></span><code>echo &quot;CPU Usage: &quot;$[100-$(vmstat 1 2|tail -1|awk &#39;{print $15}&#39;)]&quot;%&quot;
+</code></pre></div>
+<blockquote>
+<p>注意：vmstat 从 /proc/stat 获取信息，计算得到展示结果，/proc/stat 提供的是累计值，展示的数据需要计算时间间隔前后的变化，所以 vmstat 首次运行时显示自系统启动开始的各项统计信息，之后运行 vmstat 将显示自上次运行该命令以后的统计信息</p>
+</blockquote>
 <h2 id="top">top 输出解释</h2>
 <div class="highlight"><pre><span></span><code>load average: 7.59, 6.63, 4.27
 </code></pre></div>
-<p>表示系统在 1, 5, 15 分钟内的平均工作负载分别为 7.59, 6.63, 4.27。cpu 工作负载是指一段时间内，正在使用和等待使用 cpu 的平均任务数。</p>
+<p>表示系统在 1, 5, 15 分钟内的平均工作负载分别为 7.59, 6.63, 4.27。</p>
 <div class="highlight"><pre><span></span><code>%Cpu(s): 15.9 us, 13.7 sy,  0.0 ni, 63.3 id,  0.3 wa,  0.0 hi,  6.8 si,  0.0 st
 </code></pre></div>
 <ul>
 <li>us, user: 花在 userland 的 cpu 时间百分比</li>
 <li>sy, system: 花在 kernel 的 cpu 时间百分比</li>
 <li>ni, nice: 改变过优先级的进程占用 cpu 时间百分比</li>
-<li>id, idle: cpu 没有处理任何事的时间百分比</li>
+<li>id, idle: cpu 空闲状态的时间百分比</li>
 <li>wa, iowait: cpu 空闲并且同时有未完成的 io 请求，占用 cpu 时间的百分比<ol>
 <li>cpu 空闲不一定是因为进程都在等待 io，进程休眠还可能是因为等待定时器、等待键盘输入等等原因，但有未完成的 io 请求意味着确实有进程在等待 io</li>
-<li>因为 「有未完成的 io 请求」和 「cpu 空闲」不是明确的因果关系，所以出现 iowait 升高时，不一定是出现 io 瓶颈，还需要根据 io 相关的监控一起判断</li>
+<li>因为「有未完成的 io 请求」和 「cpu 空闲」不是明确的因果关系，所以出现 iowait 升高时，不一定是出现 io 瓶颈，还需要根据 io 相关的监控一起判断</li>
 <li>但是如果机器上的进程很少，只有一个消耗 cpu 和 io 负载的进程，那么出现 iowait 升高，很可能是该进程出现 io 瓶颈</li>
 </ol>
 </li>
 <li>hi</li>
 <li>si</li>
-<li>st</li>
+<li>st, stolen: time is stolen from a virtual machine</li>
 </ul>
 <p>进程列表每项含义：</p>
 <div class="highlight"><pre><span></span><code>PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND
@@ -864,9 +1033,107 @@
 </ol>
 </li>
 </ul>
-<h2 id="_1">参考：</h2>
+<h2 id="procstat">/proc/stat</h2>
+<div class="highlight"><pre><span></span><code>$ cat /proc/stat
+cpu  1556845 9332 426834 71797181 20571 0 77501 0 0 0
+cpu0 797997 18 205486 35880989 15411 0 37980 0 0 0
+cpu1 758848 9314 221348 35916191 5159 0 39520 0 0 0
+intr 381840449 56 10 0 0 632 0 0 0 0 0 0 0 15 0 0 0 0 0 0 22 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 32627201 1141 29904569 1652 0 555151 0 3 0 0 0 258369 0 181135 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ctxt 694123415
+btime 1655693978
+processes 766648
+procs_running 2
+procs_blocked 0
+softirq 379953149 6 87302416 1 208869762 993234 0 92 46347545 0 36440093
+</code></pre></div>
+<p>监控程序一般从 <code>/proc/stat</code> 中采集 CPU 监控数据，<code>/proc/stat</code> 中所有数字都是自系统开机后的累计值。</p>
+<h3 id="cpu_1">cpu</h3>
+<p>以 <code>cpu</code> 开头的一行数据汇总了机器所有 cpu 核的数据，之后的 <code>cpu0</code>, <code>cpu1</code> 表示不同 cpu 核分开的数据(这里是 2 核 cpu)，每一行都有 10 列数字，按顺序分别表示：</p>
+<ol>
+<li>user – time spent in user mode</li>
+<li>nice – time spent processing nice processes in user mode</li>
+<li>system – time spent executing kernel code</li>
+<li>idle – time spent idle</li>
+<li>iowait – time spent waiting for I/O to completed. This is considered idle time too. <em>since Linux 2.5.41</em></li>
+<li>irq – Time spent serving hardware interrupts. See the description of the intr line for more details. <em>since Linux 2.6.0</em></li>
+<li>softirq – time spent servicing software interrupts. <em>since Linux 2.6.0</em></li>
+<li>steal – Time stolen by other operating systems running in a virtual environment. <em>since Linux 2.6.11</em></li>
+<li>guest – Time spent for running a virtual CPU or guest OS under the control of the kernel. <em>since Linux 2.6.24</em></li>
+<li>guest_nice – time spent running a virtual CPU for a “niced” guest operating system. <em>since Linux 2.6.33</em></li>
+</ol>
+<p>这里的 CPU 时间以 <code>USER_HZ</code>(也被称为 <code>Jiffies</code>) 为单位，通常为 <code>1/100</code> 秒。<code>USER_HZ</code> 为编译时常量，可以通过以下方式查询：</p>
+<div class="highlight"><pre><span></span><code>$ getconf CLK_TCK
+<span class="m">100</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="n">ticks</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sysconf</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sysconf_names</span><span class="p">[</span><span class="s1">&#39;SC_CLK_TCK&#39;</span><span class="p">])</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sys/types.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;sys/param.h&gt;</span><span class="cp"></span>
+
+<span class="k">const</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="n">ticks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">sysconf</span><span class="p">(</span><span class="w"> </span><span class="n">_SC_CLK_TCK</span><span class="w"> </span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+<p><code>SC_CLK_TCK</code> 为 100，表示每秒有 100 个 CPU 时钟(clock ticks)，即每个 CPU 时间为 <code>1/100</code> 秒。</p>
+<h3 id="cpu_2">计算 CPU 使用率</h3>
+<p>根据 <code>/proc/stat</code> 中 CPU 时间数据，可以计算 CPU 使用率。</p>
+<p>CPU 使用率是指单位时间内 CPU 工作时间的占比，可以表示为:</p>
+<div class="highlight"><pre><span></span><code>CPU Usage (%) = 100 - idle / (user + nice + system + idle + iowait + irq + softirq + steal + guest + guest_nice) * 100
+</code></pre></div>
+<p>用以下命令可以计算自系统开机后，CPU 的平均使用率：</p>
+<div class="highlight"><pre><span></span><code>cat /proc/stat | grep cpu | tail -1 | awk &#39;{print $5/($2+$3+$4+$5+$6+$7+$8+$9+$10)*100}&#39; | awk &#39;{print &quot;CPU Usage: &quot; 100-$1}&#39;
+</code></pre></div>
+<p>因为 <code>/proc/stat</code> 中的数据是累计，如果要计算实时的 CPU 使用率，需要以固定时间间隔读取 <code>/proc/stat</code>，计算此时间内 CPU 使用时间占比。下面的脚本可以每隔 1 秒输出这 1 秒内的 CPU 使用率。</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+
+<span class="k">while</span> :<span class="p">;</span> <span class="k">do</span>
+
+  <span class="c1"># Get the first line with aggregate of all CPUs</span>
+  <span class="nv">cpu_now</span><span class="o">=(</span><span class="k">$(</span>head -n1 /proc/stat<span class="k">)</span><span class="o">)</span>
+
+  <span class="c1"># Get all columns but skip the first (which is the &quot;cpu&quot; string)</span>
+  <span class="nv">cpu_sum</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">cpu_now</span><span class="p">[@]:</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span>
+
+  <span class="c1"># Replace the column seperator (space) with +</span>
+  <span class="nv">cpu_sum</span><span class="o">=</span><span class="k">$((</span><span class="si">${</span><span class="nv">cpu_sum</span><span class="p">// /+</span><span class="si">}</span><span class="k">))</span>
+
+  <span class="c1"># Get the delta between two reads</span>
+  <span class="nv">cpu_delta</span><span class="o">=</span><span class="k">$((</span>cpu_sum <span class="o">-</span> cpu_last_sum<span class="k">))</span>
+
+  <span class="c1"># Get the idle time Delta</span>
+  <span class="nv">cpu_idle</span><span class="o">=</span><span class="k">$((</span>cpu_now<span class="o">[</span><span class="m">4</span><span class="o">]-</span> cpu_last<span class="o">[</span><span class="m">4</span><span class="o">]</span><span class="k">))</span>
+
+  <span class="c1"># Calc time spent working</span>
+  <span class="nv">cpu_used</span><span class="o">=</span><span class="k">$((</span>cpu_delta <span class="o">-</span> cpu_idle<span class="k">))</span>
+
+  <span class="c1"># Calc percentage</span>
+  <span class="nv">cpu_usage</span><span class="o">=</span><span class="k">$((</span><span class="m">100</span> <span class="o">*</span> cpu_used <span class="o">/</span> cpu_delta<span class="k">))</span>
+
+  <span class="c1"># Keep this as last for our next read</span>
+  <span class="nv">cpu_last</span><span class="o">=(</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">cpu_now</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">)</span>
+  <span class="nv">cpu_last_sum</span><span class="o">=</span><span class="nv">$cpu_sum</span>
+
+  <span class="nb">echo</span> <span class="s2">&quot;CPU usage at </span><span class="nv">$cpu_usage</span><span class="s2">%&quot;</span>
+
+  <span class="c1"># Wait a second before the next read</span>
+  sleep <span class="m">1</span>
+<span class="k">done</span>
+</code></pre></div>
+<h3 id="_1">其他行含义</h3>
+<ul>
+<li><code>intr</code>: 以 <code>intr</code> 开头的一行数据表示自系统开机后发生的所有中断(interrupt)，查看 <code>/proc/interrupts</code> 可以看到更多详细信息。</li>
+<li><code>ctxt</code>: 表示所有 CPU 上下文切换的次数</li>
+<li><code>btime</code>: 表示自系统开机时的 unix 时间(单位秒)</li>
+<li><code>processes</code>: 表示已创建的进程与线程的数量</li>
+<li><code>procs_running</code>: 表示正在占用 CPU 运行的进程数量</li>
+<li><code>procs_blocked</code>: 表示阻塞状态的进程数量</li>
+</ul>
+<h2 id="_2">参考</h2>
 <ul>
 <li>理解 IOWAIT: http://linuxperf.com/?p=33</li>
+<li>https://www.idnt.net/en-US/kb/941772</li>
+<li>https://www.baeldung.com/linux/get-cpu-usage</li>
+<li>https://supportcenter.checkpoint.com/supportcenter/portal?eventSubmit_doGoviewsolutiondetails=&amp;solutionid=sk65143</li>
 </ul>
                 
               
