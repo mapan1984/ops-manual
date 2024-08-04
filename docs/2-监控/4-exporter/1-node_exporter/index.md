@@ -1,6 +1,6 @@
 # 2.4.1 node_exporter
 
-node_exporter 可以采集机器的基础监控，如 cpu，内存等信息。
+[node_exporter](https://github.com/prometheus/node_exporter) 可以采集机器的基础监控，如 cpu，内存等信息。
 
     $ wget https://github.com/prometheus/node_exporter/releases/download/v0.17.0/node_exporter-0.17.0.linux-amd64.tar.gz
     $ tar zxvf node_exporter-0.17.0.linux-amd64.tar.gz

@@ -22,6 +22,8 @@
     -t 显示终端和CPU的信息
     -V 显示版本信息
 
+显示每一列的含义：
+
 * `rrqm/s` 和 `wrqm/s` (read request merged, write request merged)：每秒合并的读和写请求。如果请求队列中多个逻辑请求的地址位于相邻/同一个块，操作系统会将这些请求合并为一个请求到实际磁盘。一般顺序访问相比随机访问会出现更多的合并数
 * `r/s`：每秒发送到设备的读请求数（合并之后的数值）
 * `w/s`：每秒发送到设备的写请求数（合并之后的数值）
@@ -33,9 +35,9 @@
 * `await`：平均每个 IO 请求花费的时间（等待时间与处理时间，单位为 ms）
 * `r_await` 和 `w_await`: 平均每个 IO 读请求与写请求的所花费的时间
 * `svctm`：平均每个 IO 请求（服务）处理时间 **这项指标不可信，将被废弃**
-* `%util`：采集周期内有 IO 处理的时间比率，即 IO 队列非空的时间比率。这里有 IO 处理没有考虑 IO 有多少，只考虑有没有，但是一般块设备可以并发处理请求，所以单纯看这个值并不能说明设备处理是否饱和
+* `%util`：采集周期内有 IO 处理的时间比率，即 IO 队列非空的时间比率。这里有 IO 处理没有考虑 IO 有多少，只考虑有没有，一般块设备可以并发处理请求，所以单纯看这个值并不能说明设备处理是否饱和
 
-> 注意：iostat 从 /proc/diskstats 获取信息，计算得到展示数，/proc/diskstats 提供的是累计值，展示的数据需要计算时间间隔前后的变化，所以 iostat 首次运行时显示自系统启动开始的各项统计信息，之后运行 iostat 将显示自上次运行该命令以后的统计信息
+> 注意：iostat 从 /proc/diskstats 获取信息，计算得到展示数据。/proc/diskstats 提供的是累计值，展示的数据需要计算时间间隔前后的变化，所以 iostat 运行首次输出的是自系统启动开始到现在的各项统计信息，之后才显示自上次输出到现在的统计信息
 
 > util = (r/s+w/s) * (svctm/1000)
 
@@ -65,7 +67,7 @@
 2. `device`
 3. `read_ios`: 读操作的次数。
 4. `read_merges`: 合并读操作的次数。如果两个读操作读取相邻的数据块时，可以被合并成一个，以提高效率。合并的操作通常是 I/O scheduler（也叫elevator）负责的。
-5. `read_sectors`: 读取的扇区数量。
+5. `read_sectors`: 读取的扇区数量(每个扇区 512 字节)。
 6. `read_ticks`: 读操作消耗的时间(以毫秒为单位)，包括了在队列中等待的时间。
 7. `write_ios`: 写操作的次数。
 8. `write_merges`: 合并写操作的次数。
@@ -79,13 +81,14 @@
 
 1. 每秒读 io 次数：r/s = Δread_ios/Δt
 2. 每秒写 io 次数：w/s = Δwrite_ios/Δt
+3. 每秒读字节数：Δread_sectors*512/Δt
+4. 每秒写字节数：Δwrite_sectors*512/Δt
 3. 每个读操作平均所需的时间: r_await = Δread_ticks/Δread_ios
     > 不仅包括硬盘设备读操作的时间，还包括了在kernel队列中等待的时间。
 4. 每个写操作平均所需的时间: w_await = Δwrite_ticks/Δwrite_ios
     > 不仅包括硬盘设备写操作的时间，还包括了在kernel队列中等待的时间。
 5. 该硬盘设备的繁忙比率: %util = Δio_ticks/Δt
     > 表示该设备有I/O（即非空闲）的时间比率，不考虑I/O有多少，只考虑有没有。
-
 
 ``` python
 def diskstats():
@@ -114,6 +117,34 @@ if __name__ == '__main__':
         for name, stat in stats.iteritems():
             print '    %s: %s' % (name.replace('_', ' '), stat)
 ```
+
+## 测试磁盘 IO
+
+	$ dd if=/dev/zero of=/data/disk1/test bs=1M count=65536 oflag=direct
+	65536+0 records in
+	65536+0 records out
+	68719476736 bytes (69 GB) copied, 459.304 s, 150 MB/s
+
+## 磁盘空间
+
+    $ df -h
+
+* 磁盘的 total size != used + avail
+* use% = used / (used + avail)
+
+使用 java 计算 df 展示的指标：
+
+
+    |------------- free ----------|
+              |-------usable------|----used-----|
+    |-reserve-|
+    |xxxxxxxxx|+++++++++++++++++++|=============|
+    |---------------- total --------------------|
+
+
+https://askubuntu.com/questions/249387/df-h-used-space-avail-free-space-is-less-than-the-total-size-of-home
+
+https://stackoverflow.com/a/76363346/7417992
 
 ## 参考
 

@@ -2,6 +2,15 @@
 
 ## CPU Load
 
+    $ cat /proc/loadavg
+    7.06 7.73 8.26 7/3569 3560
+
+* 1 分钟的平均负载
+* 5 分钟的平均负载
+* 15 分钟的平均负载
+* 正在运行的进程数/活跃的总进程数
+* 最近的进程 id
+
 CPU 负载是指正在使用和等待使用 CPU 的进程数。
 
 对于单核处理器，如果 CPU 负载小于 1，意味着每个进程都能被及时处理，如果大于 1，意味着 CPU 满负荷，且有部分进程正处于等待状态，不能被及时处理。
@@ -67,7 +76,11 @@ CPU 使用率是指单位时间内 CPU 工作时间的占比。
 
     PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND
 
-* `VIRT`：virtual memory usage 虚拟内存
+* PID
+* USER
+* PR
+* NI
+* `VIRT`：virtual memory usage 虚拟内存，单位 kb
     1. 进程 *需要的* 虚拟内存大小，包括进程使用的库、代码、数据等
     2. 假如进程申请 100m 的内存，但实际只使用了 10m，那么它会增长 100m，而不是实际的使用量
 * `RES`：resident memory usage 常驻内存
@@ -80,6 +93,22 @@ CPU 使用率是指单位时间内 CPU 工作时间的占比。
     2. 虽然进程只使用了几个共享库的函数，但它包含了整个共享库的大小
     3. 计算某个进程所占的物理内存大小公式：RES – SHR
     4. swap out 后，它将会降下来
+* S
+* %CPU: cup 使用率，按 `P` 根据此列排序
+* %MEM: 内存使用率，按 `M` 根据此列排序
+* TIME+
+* COMMAND
+
+## top 操作
+
+* 筛选用户：按下 `u` 会出现输入提示 `Which user (blank for all)`，这时可以输入用户名筛选该用户下的进程。想要重置筛选条件可以重新按下 `u` 之后不输入内容直接按 `enter` 键。
+* 按列筛选：按下 `o` 会出现输入提示 `add filter #1 (ignoring case) as: [!]FLD?VAL`，这时可以输入 `filed=value`，例如输入 `COMMAND=java` 筛选 `COMMAND` 列为 java 的进程，之后可以按 `o` 增加筛选条件。想要重置筛选条件可以直接按 `=` 清除筛选条件。
+* 排序：
+    * 按下 `M` 按内存使用排序
+    * 按下 `P` 按 CPU 使用率排序
+    * 按下 `T` 按 CPU 使用时间排序
+    * 按下 `N` 按 PID 排序
+    * 按下 `R` 反向排序
 
 ## /proc/stat
 
@@ -200,3 +229,4 @@ done
 - https://www.idnt.net/en-US/kb/941772
 - https://www.baeldung.com/linux/get-cpu-usage
 - https://supportcenter.checkpoint.com/supportcenter/portal?eventSubmit_doGoviewsolutiondetails=&solutionid=sk65143
+- https://klab.tw/2023/01/linux-top-commnad/

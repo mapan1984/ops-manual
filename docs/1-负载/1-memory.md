@@ -2,10 +2,15 @@
 
 ## /proc/meminfo
 
+- MemTotal: 系统内存总量，其值为 物理内存 - 系统保留内存
+- MemFree: 未使用内存
+- MemAvailable: 可分配内存。MemFree 并不能表示可分配内存，因为有些内存，例如 Cached, Buffers 虽然已经使用，但还是可以回收并分配
+
+内存使用率计算：
+
     Memory Used = MemTotal - MemFree - Buffers - Cached
 
-    Memory Usege (%) = MemTotal - MemFree - Buffers - Cached / MemTotal
-
+    Memory Usege (%) = (MemTotal - MemFree - Buffers - Cached) / MemTotal
 
 参考：https://mapan1984.github.io/manual/2019/04/28/linux-运维问题/#free-解释
 

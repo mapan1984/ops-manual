@@ -65,3 +65,10 @@ scrape_configs:
 | --storage.tsdb.max-block-duration | 36h    | The maximum timestamp range of compacted blocks,It's the minimum duration of any persisted block. |
 | --storage.tsdb.no-lockfile        | false  | Do not create lockfile in data directory                                                          |
 
+## 界面
+
+## API
+
+查询 API:
+
+	/api/v1/query_range?query=%s&start=%s&end=%s&step=15

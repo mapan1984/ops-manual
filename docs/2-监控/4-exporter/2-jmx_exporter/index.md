@@ -1,6 +1,6 @@
 # 2.4.2 jmx_exporter
 
-jmx_exporter 可以采集 java 程序通过 jmx 暴露的数据。
+[jmx_exporter](https://github.com/prometheus/jmx_exporter) 可以采集 java 程序通过 jmx 暴露的数据。
 
 有 2 种运行方式，可以作为 javaagent 运行，也可以作为单独的 http server 运行，作为 javaagent 运行时可以额外采集到进程的 cpu，memory 等信息。
 
@@ -23,6 +23,8 @@ password:
 
 # 完整的 JMX URL，如果设置了 hostPort 则不需要设置 jmxUrl
 jmxUrl: service:jmx:rmi:///jndi/rmi://0.0.0.0:9999/jmxrmi
+
+# 0.17 之后，如果以 javaagent 运行，则 hostPort 与 jmxUrl 都不需要设置
 
 # 如果 JMX 通过 SSL 访问，设置为 true，同时需要通过以下 system properties 设置证书信息：
 #   -Djavax.net.ssl.keyStore=/home/user/.keystore

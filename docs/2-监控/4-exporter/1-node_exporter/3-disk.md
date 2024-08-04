@@ -2,6 +2,15 @@
 
 ## 容量
 
+    $ df
+    Filesystem     1K-blocks    Used Available Use% Mounted on
+    /dev/vda1       41152716 3936940  35416976  11% /
+    /dev/vdb       206292968   62136 195728688   1% /data/disk1
+
+* node_filesystem_avail_bytes: 实际可用空间，相当于 `Available * 1024`
+* node_filesystem_free_bytes: 物理可用空间，包括保留空间，会比 node_filesystem_avail_bytes 大一点
+* node_filesystem_size_bytes: 总大小，相当于 `1K-blocks * 1024`
+
 ### df -h
 
     100 - ((node_filesystem_avail_bytes{} * 100) / node_filesystem_size_bytes{})
