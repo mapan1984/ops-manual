@@ -1,31 +1,33 @@
 # 2.2 PromQL
 
+PromQL（Prometheus Query Language）是 Prometheus 的查询语言，用于从 Prometheus 数据库中提取和处理监控数据。它允许用户查询时间序列数据，并对其进行聚合、筛选和计算，广泛应用于监控系统和告警规则的配置。
+
 ## 监控数据模型
 
 prometheus 的监控数据被组织为时间序列数据，每一项由 metric name 和 labels (key-value pairs) 标识，格式为：
 
-    <metric name>{<label name>=<label value>, ...} <value>
+    <metric_name>{<label_name>=<label_value>, ...} <value>
 
-example:
+例如:
 
     api_http_requests_total{method="POST", handler="/messages"}
 
     <--------------- metric ---------------------><-timestamp -><-value->
-    http_request_total{status="200", method="GET"}@1434417560938 => 94355
-    http_request_total{status="200", method="GET"}@1434417561287 => 94334
+    http_requests_total{status="200", method="GET"}@1434417560938 => 94355
+    http_requests_total{status="200", method="GET"}@1434417561287 => 94334
 
-    http_request_total{status="404", method="GET"}@1434417560938 => 38473
-    http_request_total{status="404", method="GET"}@1434417561287 => 38544
+    http_requests_total{status="404", method="GET"}@1434417560938 => 38473
+    http_requests_total{status="404", method="GET"}@1434417561287 => 38544
 
-    http_request_total{status="200", method="POST"}@1434417560938 => 4748
-    http_request_total{status="200", method="POST"}@1434417561287 => 4785
+    http_requests_total{status="200", method="POST"}@1434417560938 => 4748
+    http_requests_total{status="200", method="POST"}@1434417561287 => 4785
 
 ## 数据类型
 
-1. Gauge: 可增可减的任意值，直接反应当前时间的状态
-2. Counter: 只增不减，通常需要与 `rate`, `irate` 等函数搭配，计算单位时间发生次数
-3. Histogram: 包含自开始监控以来监控样本个数，样本值总和，以及各值区间内样本个数
-4. Summary: 包含自监控以来监控样本个数，样本值总和，以及 50%, 90%, 99% 等样本的值
+1. Gauge: 仪表盘，可增可减的任意值，直接反应当前时间的状态
+2. Counter: 计数器，只增不减，通常需要与 `rate`, `irate` 等函数搭配，计算单位时间发生次数
+3. Histogram: 直方图，包含自开始监控以来监控样本个数，样本值总和，以及各值区间内样本个数
+4. Summary: 类似直方图，包含自监控以来监控样本个数，样本值总和，以及 50%, 90%, 99% 等样本的值
 
 ### Counter
 
@@ -43,15 +45,19 @@ example:
 
 ### Summary
 
-## promql
+## 表达式类型
 
-表达式类型：
+PromQL 查询数据类型：
 
 1. 瞬时向量(Instant vector): 一组时间序列，序列的每一项是单独的样本
+
+    例如 `http_requests_total`
 
         [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, ... ]
 
 2. 区间向量(Range vector): 一组时间序列，序列的每一项包含一段时间范围内的样本数据
+
+    例如 `http_requests_total[5m]` 表示 5 分钟内的值
 
         [ [1, 2], [3, 4], [5, 6], [7, 8], [9, 10], ... ]
 
@@ -102,10 +108,18 @@ example:
 
 时间位移：
 
-    http_request_total{} # 瞬时向量表达式，选择当前最新的数据
-    http_request_total{}[5m] # 区间向量表达式，选择以当前时间为基准，5分钟内的数据
+    http_requests_total{} # 瞬时向量表达式，选择当前最新的数据
+    http_requests_total{}[5m] # 区间向量表达式，选择以当前时间为基准，5分钟内的数据
 
-## 聚合操作
+## 操作符
+
+PromQL 提供了一些操作符，用于对时间序列进行计算或聚合。
+
+1. 算数操作符：`+、-、*、/、%`
+2. 比较操作符：`==、!=、>、<、>=、<=`
+3. 逻辑操作符：`and、or、unless`
+
+### 聚合操作
 
 作用于瞬时向量，将多组瞬时向量的值聚合，得到新的时间序列
 
@@ -127,7 +141,7 @@ example:
 
 查询系统所有http请求的总量
 
-    sum(http_request_total)
+    sum(http_requests_total)
 
 按照 mode 计算主机 CPU 的平均使用时间
 

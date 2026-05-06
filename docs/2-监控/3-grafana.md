@@ -39,6 +39,6 @@ granfana 数据目录：/var/lib/grafana
 
 - Unit 选择单位：
     - Data(IEC): 以 2 进制计算，即 1 GiB = 1024 MiB，1 MiB = 1024 KiB，1 KiB = 1024 Byte
-    - Data(Metric): 以 10 进制计算，即 1 GB = 1000 MB，1 MB = 1000 KB，1 KB = 1000 Byte
+    - Data(Metric)/(SI): 以 10 进制计算，即 1 GB = 1000 MB，1 MB = 1000 KB，1 KB = 1000 Byte
 
 ### Legend 图例设置

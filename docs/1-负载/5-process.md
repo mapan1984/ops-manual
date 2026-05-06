@@ -58,7 +58,6 @@
 
 * Threads: 线程数
 
-
 ## /proc/sys/kernel/
 
 * 线程数最大限制：/proc/sys/kernel/threads-max

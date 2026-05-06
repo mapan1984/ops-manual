@@ -4,7 +4,7 @@
 
 使用：
 
-    iostat [ options  ] [ <interval> [ <count>  ]  ]
+    iostat [options] [<interval> [<count>]]
 
 比如间隔 2 每秒展示一次统计数据，总共展示 20 次：
 
@@ -35,21 +35,22 @@
 * `await`：平均每个 IO 请求花费的时间（等待时间与处理时间，单位为 ms）
 * `r_await` 和 `w_await`: 平均每个 IO 读请求与写请求的所花费的时间
 * `svctm`：平均每个 IO 请求（服务）处理时间 **这项指标不可信，将被废弃**
-* `%util`：采集周期内有 IO 处理的时间比率，即 IO 队列非空的时间比率。这里有 IO 处理没有考虑 IO 有多少，只考虑有没有，一般块设备可以并发处理请求，所以单纯看这个值并不能说明设备处理是否饱和
+* `%util`：采集周期内有 IO 处理的时间比率，即 IO 队列非空的时间比率。（这里有 IO 处理没有考虑 IO 有多少，只考虑有没有，一般块设备可以并发处理请求，所以单纯看这个值并不能说明设备处理是否饱和）
 
 > 注意：iostat 从 /proc/diskstats 获取信息，计算得到展示数据。/proc/diskstats 提供的是累计值，展示的数据需要计算时间间隔前后的变化，所以 iostat 运行首次输出的是自系统启动开始到现在的各项统计信息，之后才显示自上次输出到现在的统计信息
 
-> util = (r/s+w/s) * (svctm/1000)
+> IO 使用率 = 采集周期内 IO 处理时长/采集周期时长
+> 假设采集周期为 1000ms，则 %util = (r/s + w/s) * svctm / 1000
 
 > 常见 linux 的磁盘 IO 指标的缩写习惯：
-> rq 是 request
-> r 是 read
-> w 是 write
-> qu 是 queue
-> sz 是 size
-> a 是 average
-> tm 是 time
-> svc 是 service。
+> - rq 是 request
+> - r 是 read
+> - w 是 write
+> - qu 是 queue
+> - sz 是 size
+> - a 是 average
+> - tm 是 time
+> - svc 是 service。
 
 ## /proc/diskstats
 
@@ -65,65 +66,40 @@
 0. `major_dev_num`
 1. `minor_dev_num`
 2. `device`
+
 3. `read_ios`: 读操作的次数。
 4. `read_merges`: 合并读操作的次数。如果两个读操作读取相邻的数据块时，可以被合并成一个，以提高效率。合并的操作通常是 I/O scheduler（也叫elevator）负责的。
 5. `read_sectors`: 读取的扇区数量(每个扇区 512 字节)。
 6. `read_ticks`: 读操作消耗的时间(以毫秒为单位)，包括了在队列中等待的时间。
+
 7. `write_ios`: 写操作的次数。
 8. `write_merges`: 合并写操作的次数。
 9. `write_sectors`: 写入的扇区数量。
 10. `write_ticks`: 写操作消耗的时间(以毫秒为单位)。
+
 11. `in_flight`: 当前未完成的 I/O 数量。在 I/O 请求进入队列时该值加 1，在 I/O 结束时该值减 1。注意：是 I/O 请求进入队列时，而不是提交给硬盘设备时。
-12. `io_ticks`: 该设备用于处理 I/O 的自然时间(`wall-clock time`)。请注意 `io_ticks` 与 `read_ticks` 和 `write_ticks` 的区别，`read_ticks` 和 `write_ticks` 是把每一个 I/O 所消耗的时间累加在一起，因为硬盘设备通常可以并行处理多个 I/O，所以 `read_ticks` 和 `write_ticks` 往往会比自然时间大。而 `io_ticks` 表示该设备有 I/O（即非空闲）的时间，不考虑 I/O 有多少，只考虑有没有。在实际计算时，字段 `in_flight` 不为零的时候 `io_ticks` 保持计时，字段 `in_flight` 为零的时候 `io_ticks` 停止计时。
+12. `io_ticks`: 该设备用于处理 I/O 的自然时间(`wall-clock time`)，单位：ms。请注意 `io_ticks` 与 `read_ticks` 和 `write_ticks` 的区别，`read_ticks` 和 `write_ticks` 是把每一个 I/O 所消耗的时间累加在一起，因为硬盘设备通常可以并行处理多个 I/O，所以 `read_ticks` 和 `write_ticks` 往往会比自然时间大。而 `io_ticks` 表示该设备有 I/O（即非空闲）的时间，不考虑 I/O 有多少，只考虑有没有。在实际计算时，字段 `in_flight` 不为零的时候 `io_ticks` 保持计时，字段 `in_flight` 为零的时候 `io_ticks` 停止计时。
 13. `time_in_queue`: 对 `io_ticks` 的加权值。`io_ticks` 是自然时间，不考虑当前有几个 I/O，而 `time_in_queue` 是用当前的 I/O 数量（即字段 `in-flight`）乘以自然时间。虽然该字段的名称是 `time_in_queue`，但并不真的只是在队列中的时间，其中还包含了硬盘处理 I/O 的时间。iostat 在计算 `avgqu-sz` 时会用到这个字段。
 
 监控项：
 
-1. 每秒读 io 次数：r/s = Δread_ios/Δt
-2. 每秒写 io 次数：w/s = Δwrite_ios/Δt
-3. 每秒读字节数：Δread_sectors*512/Δt
-4. 每秒写字节数：Δwrite_sectors*512/Δt
-3. 每个读操作平均所需的时间: r_await = Δread_ticks/Δread_ios
-    > 不仅包括硬盘设备读操作的时间，还包括了在kernel队列中等待的时间。
-4. 每个写操作平均所需的时间: w_await = Δwrite_ticks/Δwrite_ios
-    > 不仅包括硬盘设备写操作的时间，还包括了在kernel队列中等待的时间。
-5. 该硬盘设备的繁忙比率: %util = Δio_ticks/Δt
+1. 每秒读 io 次数：r/s = Δread_ios / Δt
+2. 每秒写 io 次数：w/s = Δwrite_ios / Δt
+3. 每秒读字节数：Δread_sectors * 512 / Δt
+4. 每秒写字节数：Δwrite_sectors * 512 / Δt
+3. 每个读操作平均所需的时间: r_await = Δread_ticks / Δread_ios
+    > 不仅包括硬盘设备读操作的时间，还包括了在 kernel 队列中等待的时间。
+4. 每个写操作平均所需的时间: w_await = Δwrite_ticks / Δwrite_ios
+    > 不仅包括硬盘设备写操作的时间，还包括了在 kernel 队列中等待的时间。
+5. 该硬盘设备的繁忙比率: %util = Δio_ticks / Δt
     > 表示该设备有I/O（即非空闲）的时间比率，不考虑I/O有多少，只考虑有没有。
-
-``` python
-def diskstats():
-    file_path = '/proc/diskstats'
-
-    # http://lxr.osuosl.org/source/Documentation/iostats.txt
-    columns_disk = ['major_dev_num', 'minor_dev_num', 'device', 'reads', 'reads_merged', 'sectors_read', 'ms_reading', 'writes', 'writes_merged', 'sectors_written', 'ms_writing', 'current_ios', 'ms_doing_io', 'weighted_ms_doing_io']
-    columns_partition = ['major_dev_num', 'minor_dev_num', 'device', 'reads', 'sectors_read', 'writes', 'sectors_written']
-
-    result = {}
-    for line in (l for l in open(file_path, 'r').xreadlines() if l != ''):
-        parts = line.split()
-        if len(parts) == len(columns_disk):
-            columns = columns_disk
-        elif len(parts) == len(columns_partition):
-            columns = columns_partition
-        else:
-            continue
-        data = dict(zip(columns_disk, parts))
-        result[data['device']] = dict((k, int(v)) for k, v in data.iteritems() if k != 'device')
-    return result
-
-if __name__ == '__main__':
-    for device, stats in diskstats().iteritems():
-        print device
-        for name, stat in stats.iteritems():
-            print '    %s: %s' % (name.replace('_', ' '), stat)
-```
 
 ## 测试磁盘 IO
 
-	$ dd if=/dev/zero of=/data/disk1/test bs=1M count=65536 oflag=direct
-	65536+0 records in
-	65536+0 records out
-	68719476736 bytes (69 GB) copied, 459.304 s, 150 MB/s
+    $ dd if=/dev/zero of=/data/disk1/test bs=1M count=65536 oflag=direct
+    65536+0 records in
+    65536+0 records out
+    68719476736 bytes (69 GB) copied, 459.304 s, 150 MB/s
 
 ## 磁盘空间
 
@@ -142,9 +118,65 @@ if __name__ == '__main__':
     |---------------- total --------------------|
 
 
+``` java
+File file = new File("/");
+
+// 总空间，单位 byte
+long total = file.getTotalSpace();
+
+// 可用空间，单位 byte
+long usable = file.getUsableSpace();
+```
+
+### 保留空间
+
+保留空间默认 5%，用来避免系统进程以及文件系统优化，超级用户在磁盘写满的情况下仍有足够的空间来修复问题。
+
+查看保留空间：
+
+    $ tune2fs -l /dev/vdb | grep "Reserved block count"
+
+查看块大小：
+
+    $ tune2fs -l /dev/vdb | grep "Block size"
+
+修改保留空间比例：
+
+    $ tune2fs -m 1 /dev/vdb
+    tune2fs 1.42.9 (28-Dec-2013)
+    Setting reserved blocks percentage to 1% (262144 blocks)
+
+完全去掉保留空间
+
+    $ tune2fs -m 0 /dev/vdb
+    tune2fs 1.42.9 (28-Dec-2013)
+    Setting reserved blocks percentage to 0% (0 blocks)
+
 https://askubuntu.com/questions/249387/df-h-used-space-avail-free-space-is-less-than-the-total-size-of-home
 
 https://stackoverflow.com/a/76363346/7417992
+
+## /proc/mounts
+
+    $ cat /proc/mounts
+    /dev/vda1 / ext4 rw,relatime,data=ordered 0 0
+    /dev/vdb /data/disk1 ext4 rw,relatime,data=ordered 0 0
+    /dev/vdc /data/disk2 ext4 rw,relatime,data=ordered 0 0
+
+每一列字段含义为：
+
+* device
+* mount point
+* file-system type
+* read-only / read-write
+* dummy values
+
+## /proc/sys/fs/
+
+    $ cat /proc/sys/fs/file-nr
+    1920    0    6553500
+
+表示系统支持最多文件数为 `6553500` 个，当前已用 `1920` 个文件
 
 ## 参考
 
@@ -152,3 +184,8 @@ https://stackoverflow.com/a/76363346/7417992
 - https://blog.csdn.net/MrSate/article/details/104421383
 - https://tech.meituan.com/2017/05/19/about-desk-io.html
 - https://gist.github.com/mmalone/1081615/a37b09ce1d6ac6960742444c50f99728bffc9859
+- https://github.com/prometheus/node_exporter/blob/v1.3.1/collector/filesystem_linux.go
+- https://www.robustperception.io/kernel-file-descriptor-metrics-from-the-node-exporter/
+- https://www.robustperception.io/dealing-with-too-many-open-files/
+- https://www.orchome.com/1445
+- https://github.com/prometheus/node_exporter/blob/v1.3.1/collector/filefd_linux.go

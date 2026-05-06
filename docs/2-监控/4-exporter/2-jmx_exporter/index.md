@@ -76,6 +76,8 @@ rules:
 
 得到 target/jmx_prometheus_httpserver-0.16.2-SNAPSHOT-jar-with-dependencies.jar
 
+    java -jar jmx_prometheus_httpserver-0.17.1.jar 5556 jmx_prometheus.yaml
+
 ## rules 详细介绍
 
 JMX `MBean` 对象需要以一个 `ObjectName` 作为定位标记，`ObjectName` 包含 `domain` 与 `properties` 2 部分，jmx_exporter 配置中的 `rules` 就是将 `ObjectName` 转换为 prometheus 接受的上报格式。
