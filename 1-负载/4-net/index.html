@@ -12,9 +12,13 @@
         <meta name="author" content="mapan">
       
       
-        <link rel="canonical" href="https://mapan1984.github.io/ops-manual/1-%E8%B4%9F%E8%BD%BD/5-netstat/">
+        <link rel="canonical" href="https://mapan1984.github.io/ops-manual/1-%E8%B4%9F%E8%BD%BD/4-net/">
       
       
+        <link rel="prev" href="../3-disk/">
+      
+      
+        <link rel="next" href="../5-process/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -250,21 +254,21 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
         
           
           
@@ -286,7 +290,7 @@
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_1">
             <span class="md-nav__icon md-icon"></span>
             1. 负载
@@ -325,7 +329,7 @@
         
   
   <span class="md-ellipsis">
-    1.2 cpu
+    1.2 CPU
   </span>
   
 
@@ -360,14 +364,150 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../1-负载/4-net.md" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    1.4 网络
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
     1.4 网络
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#procnetdev" class="md-nav__link">
+    <span class="md-ellipsis">
+      /proc/net/dev
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#procnetnetstat" class="md-nav__link">
+    <span class="md-ellipsis">
+      /proc/net/netstat
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="/proc/net/netstat">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      字段解释
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#procnetsnmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      /proc/net/snmp
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="/proc/net/snmp">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      字段解释
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#procnetsockstat-procnetsockstat6" class="md-nav__link">
+    <span class="md-ellipsis">
+      /proc/net/sockstat /proc/net/sockstat6
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      参考
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5-process/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.5 进程
   </span>
   
 
@@ -434,7 +574,7 @@
         
   
   <span class="md-ellipsis">
-    2.1 prometheus
+    2.1 Prometheus
   </span>
   
 
@@ -455,7 +595,7 @@
         
   
   <span class="md-ellipsis">
-    2.2 promql
+    2.2 PromQL
   </span>
   
 
@@ -476,7 +616,7 @@
         
   
   <span class="md-ellipsis">
-    2.3 grafana
+    2.3 Grafana
   </span>
   
 
@@ -513,7 +653,7 @@
               
   
   <span class="md-ellipsis">
-    2.4 exporter
+    2.4 Exporter
   </span>
   
 
@@ -529,7 +669,7 @@
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_4">
             <span class="md-nav__icon md-icon"></span>
-            2.4 exporter
+            2.4 Exporter
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -612,7 +752,7 @@
         
   
   <span class="md-ellipsis">
-    2.4.1.2 cpu
+    2.4.1.2 CPU
   </span>
   
 
@@ -634,6 +774,27 @@
   
   <span class="md-ellipsis">
     2.4.1.3 磁盘
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2-%E7%9B%91%E6%8E%A7/4-exporter/1-node_exporter/4-net/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.4.1.4 网络
   </span>
   
 
@@ -725,113 +886,16 @@
   
   
   
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
+    <li class="md-nav__item">
+      <a href="/kafka-manual/5-监控/" target="_blank" class="md-nav__link">
         
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4_2_2" >
-        
-          
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../../2-%E7%9B%91%E6%8E%A7/4-exporter/2-jmx_exporter/2-kafka/" class="md-nav__link ">
-              
   
   <span class="md-ellipsis">
     2.4.2.2 kafka
   </span>
   
 
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_2_4_2_2" id="__nav_2_4_2_2_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_4_2_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_4_2_2">
-            <span class="md-nav__icon md-icon"></span>
-            2.4.2.2 kafka
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../2-%E7%9B%91%E6%8E%A7/4-exporter/2-jmx_exporter/2-kafka/1-%E5%90%AF%E5%8A%A8%E6%96%B9%E5%BC%8F/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    2.4.2.2.1 启动方式
-  </span>
-  
-
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../2-%E7%9B%91%E6%8E%A7/4-exporter/2-jmx_exporter/2-kafka/2-%E7%9B%91%E6%8E%A7%E9%A1%B9/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    2.4.2.2.2 监控项
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../2-%E7%9B%91%E6%8E%A7/4-exporter/2-jmx_exporter/2-kafka/3-rules%E9%85%8D%E7%BD%AE/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    2.4.2.2.3 rules 配置
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -929,6 +993,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#procnetdev" class="md-nav__link">
+    <span class="md-ellipsis">
+      /proc/net/dev
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#procnetnetstat" class="md-nav__link">
     <span class="md-ellipsis">
       /proc/net/netstat
@@ -1013,6 +1086,49 @@
 
 
 <h1 id="14">1.4 网络</h1>
+<div class="highlight"><pre><span></span><code>netstat -s | grep -E &#39;overflow|drop&#39;
+
+nstat -az | grep -E &#39;TcpExtListenOverflows|TcpExtListenDrops&#39;
+</code></pre></div>
+<h2 id="procnetdev">/proc/net/dev</h2>
+<div class="highlight"><pre><span></span><code>$ cat /proc/net/dev
+Inter-|   Receive                                                |  Transmit
+ face |bytes    packets errs drop fifo frame compressed multicast|bytes    packets errs drop fifo colls carrier compressed
+  eth0: 1690625101 14339695    0    0    0     0          0         0 2959063809 14364497    0    0    0     0       0          0
+    lo: 1747298251 6994514    0    0    0     0          0         0 1747298251 6994514    0    0    0     0       0          0
+</code></pre></div>
+<ul>
+<li><code>bytes</code>: The total number of bytes of data transmitted or received by the interface.（接口发送或接收的数据的总字节数）</li>
+<li><code>packets</code>: The total number of packets of data transmitted or received by the interface.（接口发送或接收的数据包总数）</li>
+<li><code>errs</code>: The total number of transmit or receive errors detected by the device driver.（由设备驱动程序检测到的发送或接收错误的总数）</li>
+<li><code>drop</code>: The total number of packets dropped by the device driver.（设备驱动程序丢弃的数据包总数）</li>
+<li><code>fifo</code>: The number of FIFO buffer errors.（FIFO缓冲区错误的数量）</li>
+<li><code>compressed</code>: The number of compressed packets transmitted or received by the device driver. (This appears to be unused in the 2.2.15 kernel.)（设备驱动程序发送或接收的压缩数据包数）</li>
+<li><code>frame</code>: The number of packet framing errors.（分组帧错误的数量）</li>
+<li><code>colls</code>: The number of collisions detected on the interface.（接口上检测到的冲突数）</li>
+<li><code>carrier</code>: The number of carrier losses detected by the device driver.（由设备驱动程序检测到的载波损耗的数量）</li>
+<li><code>multicast</code>: The number of multicast frames transmitted or received by the device driver.（设备驱动程序发送或接收的多播帧数）</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="n">lines</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/proc/net/dev&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+<span class="n">columnLine</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">receiveCols</span> <span class="p">,</span> <span class="n">transmitCols</span> <span class="o">=</span> <span class="n">columnLine</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">)</span>
+<span class="n">receiveCols</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="s2">&quot;recv_&quot;</span> <span class="o">+</span> <span class="n">a</span><span class="p">,</span> <span class="n">receiveCols</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<span class="n">transmitCols</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="s2">&quot;trans_&quot;</span> <span class="o">+</span> <span class="n">a</span><span class="p">,</span> <span class="n">transmitCols</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+
+<span class="n">cols</span> <span class="o">=</span> <span class="n">receiveCols</span> <span class="o">+</span> <span class="n">transmitCols</span>
+
+<span class="n">faces</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">[</span><span class="mi">2</span><span class="p">:]:</span>
+    <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="n">face</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+    <span class="n">faceData</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">cols</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">()))</span>
+    <span class="n">faces</span><span class="p">[</span><span class="n">face</span><span class="p">]</span> <span class="o">=</span> <span class="n">faceData</span>
+
+<span class="kn">import</span> <span class="nn">pprint</span>
+<span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">faces</span><span class="p">)</span>
+</code></pre></div>
 <h2 id="procnetnetstat">/proc/net/netstat</h2>
 <div class="highlight"><pre><span></span><code>$ cat /proc/net/netstat
 TcpExt: SyncookiesSent SyncookiesRecv SyncookiesFailed EmbryonicRsts PruneCalled RcvPruned OfoPruned OutOfWindowIcmps LockDroppedIcmps ArpFilter TW TWRecycled TWKilled PAWSPassive PAWSActive PAWSEstab DelayedACKs DelayedACKLocked DelayedACKLost ListenOverflows ListenDrops TCPPrequeued TCPDirectCopyFromBacklog TCPDirectCopyFromPrequeue TCPPrequeueDropped TCPHPHits TCPHPHitsToUser TCPPureAcks TCPHPAcks TCPRenoRecovery TCPSackRecovery TCPSACKReneging TCPFACKReorder TCPSACKReorder TCPRenoReorder TCPTSReorder TCPFullUndo TCPPartialUndo TCPDSACKUndo TCPLossUndo TCPLostRetransmit TCPRenoFailures TCPSackFailures TCPLossFailures TCPFastRetrans TCPForwardRetrans TCPSlowStartRetrans TCPTimeouts TCPLossProbes TCPLossProbeRecovery TCPRenoRecoveryFail TCPSackRecoveryFail TCPSchedulerFailed TCPRcvCollapsed TCPDSACKOldSent TCPDSACKOfoSent TCPDSACKRecv TCPDSACKOfoRecv TCPAbortOnData TCPAbortOnClose TCPAbortOnMemory TCPAbortOnTimeout TCPAbortOnLinger TCPAbortFailed TCPMemoryPressures TCPSACKDiscard TCPDSACKIgnoredOld TCPDSACKIgnoredNoUndo TCPSpuriousRTOs TCPMD5NotFound TCPMD5Unexpected TCPSackShifted TCPSackMerged TCPSackShiftFallback TCPBacklogDrop PFMemallocDrop TCPMinTTLDrop TCPDeferAcceptDrop IPReversePathFilter TCPTimeWaitOverflow TCPReqQFullDoCookies TCPReqQFullDrop TCPRetransFail TCPRcvCoalesce TCPOFOQueue TCPOFODrop TCPOFOMerge TCPChallengeACK TCPSYNChallenge TCPFastOpenActive TCPFastOpenActiveFail TCPFastOpenPassive TCPFastOpenPassiveFail TCPFastOpenListenOverflow TCPFastOpenCookieReqd TCPSpuriousRtxHostQueues BusyPollRxPackets TCPAutoCorking TCPFromZeroWindowAdv TCPToZeroWindowAdv TCPWantZeroWindowAdv TCPSynRetrans TCPOrigDataSent TCPHystartTrainDetect TCPHystartTrainCwnd TCPHystartDelayDetect TCPHystartDelayCwnd TCPACKSkippedSynRecv TCPACKSkippedPAWS TCPACKSkippedSeq TCPACKSkippedFinWait2 TCPACKSkippedTimeWait TCPACKSkippedChallenge TCPWqueueTooBig
@@ -1131,6 +1247,7 @@ FRAG      0         0         0
 </code></pre></div>
 <h2 id="_3">参考</h2>
 <ul>
+<li>https://github.com/prometheus/node_exporter/blob/v1.3.1/collector/netdev_linux.go</li>
 <li>https://github.com/prometheus/node_exporter/blob/v1.3.1/collector/netstat_linux.go</li>
 <li>https://perthcharles.github.io/2015/11/10/wiki-netstat-proc/</li>
 <li>https://adil.medium.com/examination-of-the-closed-column-of-ss-command-d6f21aeaa5e1</li>

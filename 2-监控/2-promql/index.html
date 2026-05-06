@@ -26,7 +26,7 @@
     
     
       
-        <title>2.2 promql - 运维手册</title>
+        <title>2.2 PromQL - 运维手册</title>
       
     
     
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              2.2 promql
+              2.2 PromQL
             
           </span>
         </div>
@@ -329,7 +329,7 @@
         
   
   <span class="md-ellipsis">
-    1.2 cpu
+    1.2 CPU
   </span>
   
 
@@ -367,11 +367,32 @@
   
   
     <li class="md-nav__item">
-      <a href="../../1-负载/4-net.md" class="md-nav__link">
+      <a href="../../1-%E8%B4%9F%E8%BD%BD/4-net/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     1.4 网络
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../1-%E8%B4%9F%E8%BD%BD/5-process/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1.5 进程
   </span>
   
 
@@ -438,7 +459,7 @@
         
   
   <span class="md-ellipsis">
-    2.1 prometheus
+    2.1 Prometheus
   </span>
   
 
@@ -468,7 +489,7 @@
           
   
   <span class="md-ellipsis">
-    2.2 promql
+    2.2 PromQL
   </span>
   
 
@@ -479,7 +500,7 @@
         
   
   <span class="md-ellipsis">
-    2.2 promql
+    2.2 PromQL
   </span>
   
 
@@ -561,17 +582,17 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#promql" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
-      promql
+      表达式类型
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="promql">
+    <nav class="md-nav" aria-label="表达式类型">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       瞬时向量
     </span>
@@ -580,7 +601,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       区间向量
     </span>
@@ -594,16 +615,31 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      操作符
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="操作符">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       聚合操作
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       内置函数
     </span>
@@ -682,7 +718,7 @@
         
   
   <span class="md-ellipsis">
-    2.3 grafana
+    2.3 Grafana
   </span>
   
 
@@ -719,7 +755,7 @@
               
   
   <span class="md-ellipsis">
-    2.4 exporter
+    2.4 Exporter
   </span>
   
 
@@ -735,7 +771,7 @@
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_4">
             <span class="md-nav__icon md-icon"></span>
-            2.4 exporter
+            2.4 Exporter
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -818,7 +854,7 @@
         
   
   <span class="md-ellipsis">
-    2.4.1.2 cpu
+    2.4.1.2 CPU
   </span>
   
 
@@ -840,6 +876,27 @@
   
   <span class="md-ellipsis">
     2.4.1.3 磁盘
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4-exporter/1-node_exporter/4-net/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2.4.1.4 网络
   </span>
   
 
@@ -931,113 +988,16 @@
   
   
   
-    
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
+    <li class="md-nav__item">
+      <a href="/kafka-manual/5-监控/" target="_blank" class="md-nav__link">
         
-        
-        
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_4_2_2" >
-        
-          
-          
-          <div class="md-nav__link md-nav__container">
-            <a href="../4-exporter/2-jmx_exporter/2-kafka/" class="md-nav__link ">
-              
   
   <span class="md-ellipsis">
     2.4.2.2 kafka
   </span>
   
 
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_2_4_2_2" id="__nav_2_4_2_2_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
-        
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_2_4_2_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_4_2_2">
-            <span class="md-nav__icon md-icon"></span>
-            2.4.2.2 kafka
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../4-exporter/2-jmx_exporter/2-kafka/1-%E5%90%AF%E5%8A%A8%E6%96%B9%E5%BC%8F/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    2.4.2.2.1 启动方式
-  </span>
-  
-
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../4-exporter/2-jmx_exporter/2-kafka/2-%E7%9B%91%E6%8E%A7%E9%A1%B9/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    2.4.2.2.2 监控项
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../4-exporter/2-jmx_exporter/2-kafka/3-rules%E9%85%8D%E7%BD%AE/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    2.4.2.2.3 rules 配置
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -1195,17 +1155,17 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#promql" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
-      promql
+      表达式类型
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="promql">
+    <nav class="md-nav" aria-label="表达式类型">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       瞬时向量
     </span>
@@ -1214,7 +1174,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       区间向量
     </span>
@@ -1228,16 +1188,31 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      操作符
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="操作符">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
     <span class="md-ellipsis">
       聚合操作
     </span>
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       内置函数
     </span>
@@ -1315,29 +1290,30 @@
 
 
 <h1 id="22-promql">2.2 PromQL</h1>
+<p>PromQL（Prometheus Query Language）是 Prometheus 的查询语言，用于从 Prometheus 数据库中提取和处理监控数据。它允许用户查询时间序列数据，并对其进行聚合、筛选和计算，广泛应用于监控系统和告警规则的配置。</p>
 <h2 id="_1">监控数据模型</h2>
 <p>prometheus 的监控数据被组织为时间序列数据，每一项由 metric name 和 labels (key-value pairs) 标识，格式为：</p>
-<div class="highlight"><pre><span></span><code>&lt;metric name&gt;{&lt;label name&gt;=&lt;label value&gt;, ...} &lt;value&gt;
+<div class="highlight"><pre><span></span><code>&lt;metric_name&gt;{&lt;label_name&gt;=&lt;label_value&gt;, ...} &lt;value&gt;
 </code></pre></div>
-<p>example:</p>
+<p>例如:</p>
 <div class="highlight"><pre><span></span><code>api_http_requests_total{method=&quot;POST&quot;, handler=&quot;/messages&quot;}
 
 &lt;--------------- metric ---------------------&gt;&lt;-timestamp -&gt;&lt;-value-&gt;
-http_request_total{status=&quot;200&quot;, method=&quot;GET&quot;}@1434417560938 =&gt; 94355
-http_request_total{status=&quot;200&quot;, method=&quot;GET&quot;}@1434417561287 =&gt; 94334
+http_requests_total{status=&quot;200&quot;, method=&quot;GET&quot;}@1434417560938 =&gt; 94355
+http_requests_total{status=&quot;200&quot;, method=&quot;GET&quot;}@1434417561287 =&gt; 94334
 
-http_request_total{status=&quot;404&quot;, method=&quot;GET&quot;}@1434417560938 =&gt; 38473
-http_request_total{status=&quot;404&quot;, method=&quot;GET&quot;}@1434417561287 =&gt; 38544
+http_requests_total{status=&quot;404&quot;, method=&quot;GET&quot;}@1434417560938 =&gt; 38473
+http_requests_total{status=&quot;404&quot;, method=&quot;GET&quot;}@1434417561287 =&gt; 38544
 
-http_request_total{status=&quot;200&quot;, method=&quot;POST&quot;}@1434417560938 =&gt; 4748
-http_request_total{status=&quot;200&quot;, method=&quot;POST&quot;}@1434417561287 =&gt; 4785
+http_requests_total{status=&quot;200&quot;, method=&quot;POST&quot;}@1434417560938 =&gt; 4748
+http_requests_total{status=&quot;200&quot;, method=&quot;POST&quot;}@1434417561287 =&gt; 4785
 </code></pre></div>
 <h2 id="_2">数据类型</h2>
 <ol>
-<li>Gauge: 可增可减的任意值，直接反应当前时间的状态</li>
-<li>Counter: 只增不减，通常需要与 <code>rate</code>, <code>irate</code> 等函数搭配，计算单位时间发生次数</li>
-<li>Histogram: 包含自开始监控以来监控样本个数，样本值总和，以及各值区间内样本个数</li>
-<li>Summary: 包含自监控以来监控样本个数，样本值总和，以及 50%, 90%, 99% 等样本的值</li>
+<li>Gauge: 仪表盘，可增可减的任意值，直接反应当前时间的状态</li>
+<li>Counter: 计数器，只增不减，通常需要与 <code>rate</code>, <code>irate</code> 等函数搭配，计算单位时间发生次数</li>
+<li>Histogram: 直方图，包含自开始监控以来监控样本个数，样本值总和，以及各值区间内样本个数</li>
+<li>Summary: 类似直方图，包含自监控以来监控样本个数，样本值总和，以及 50%, 90%, 99% 等样本的值</li>
 </ol>
 <h3 id="counter">Counter</h3>
 <div class="highlight"><pre><span></span><code>rate(http_requests_total[5m])
@@ -1351,16 +1327,18 @@ predict_linear(node_filesystem_free{job=&quot;node&quot;}[1h], 4 * 3600)
 </code></pre></div>
 <h3 id="histogram">Histogram</h3>
 <h3 id="summary">Summary</h3>
-<h2 id="promql">promql</h2>
-<p>表达式类型：</p>
+<h2 id="_3">表达式类型</h2>
+<p>PromQL 查询数据类型：</p>
 <ol>
 <li>
 <p>瞬时向量(Instant vector): 一组时间序列，序列的每一项是单独的样本</p>
+<p>例如 <code>http_requests_total</code></p>
 <div class="highlight"><pre><span></span><code>[ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, ... ]
 </code></pre></div>
 </li>
 <li>
 <p>区间向量(Range vector): 一组时间序列，序列的每一项包含一段时间范围内的样本数据</p>
+<p>例如 <code>http_requests_total[5m]</code> 表示 5 分钟内的值</p>
 <div class="highlight"><pre><span></span><code>[ [1, 2], [3, 4], [5, 6], [7, 8], [9, 10], ... ]
 </code></pre></div>
 </li>
@@ -1372,7 +1350,7 @@ predict_linear(node_filesystem_free{job=&quot;node&quot;}[1h], 4 * 3600)
 <blockquote>
 <p>只有瞬时向量可以绘制为图表数据</p>
 </blockquote>
-<h3 id="_3">瞬时向量</h3>
+<h3 id="_4">瞬时向量</h3>
 <p>直接以 metrics 名查询</p>
 <div class="highlight"><pre><span></span><code>http_requests_total
 http_requests_total{}
@@ -1393,7 +1371,7 @@ http_requests_total{}
 <p>不含某个标签（以不含 <code>topic</code> 标签为例）：</p>
 <div class="highlight"><pre><span></span><code>kafka_server_BrokerTopicMetrics_OneMinuteRate{name=&quot;BytesOutPerSec&quot;, topic=&quot;&quot;}
 </code></pre></div>
-<h3 id="_4">区间向量</h3>
+<h3 id="_5">区间向量</h3>
 <p>时间单位：</p>
 <ul>
 <li>s - 秒</li>
@@ -1404,10 +1382,17 @@ http_requests_total{}
 <li>y - 年</li>
 </ul>
 <p>时间位移：</p>
-<div class="highlight"><pre><span></span><code>http_request_total{} # 瞬时向量表达式，选择当前最新的数据
-http_request_total{}[5m] # 区间向量表达式，选择以当前时间为基准，5分钟内的数据
+<div class="highlight"><pre><span></span><code>http_requests_total{} # 瞬时向量表达式，选择当前最新的数据
+http_requests_total{}[5m] # 区间向量表达式，选择以当前时间为基准，5分钟内的数据
 </code></pre></div>
-<h2 id="_5">聚合操作</h2>
+<h2 id="_6">操作符</h2>
+<p>PromQL 提供了一些操作符，用于对时间序列进行计算或聚合。</p>
+<ol>
+<li>算数操作符：<code>+、-、*、/、%</code></li>
+<li>比较操作符：<code>==、!=、&gt;、&lt;、&gt;=、&lt;=</code></li>
+<li>逻辑操作符：<code>and、or、unless</code></li>
+</ol>
+<h3 id="_7">聚合操作</h3>
 <p>作用于瞬时向量，将多组瞬时向量的值聚合，得到新的时间序列</p>
 <ul>
 <li>sum (求和)</li>
@@ -1426,7 +1411,7 @@ http_request_total{}[5m] # 区间向量表达式，选择以当前时间为基�
 <div class="highlight"><pre><span></span><code>&lt;aggr-op&gt;([parameter,] &lt;vector expression&gt;) [without|by (&lt;label list&gt;)]
 </code></pre></div>
 <p>查询系统所有http请求的总量</p>
-<div class="highlight"><pre><span></span><code>sum(http_request_total)
+<div class="highlight"><pre><span></span><code>sum(http_requests_total)
 </code></pre></div>
 <p>按照 mode 计算主机 CPU 的平均使用时间</p>
 <div class="highlight"><pre><span></span><code>avg(node_cpu) by (mode)
@@ -1437,7 +1422,7 @@ http_request_total{}[5m] # 区间向量表达式，选择以当前时间为基�
 <p><code>label list</code> 也可以放在前面</p>
 <div class="highlight"><pre><span></span><code>sum by (job) (matrics{})
 </code></pre></div>
-<h2 id="_6">内置函数</h2>
+<h2 id="_8">内置函数</h2>
 <h3 id="rate">rate</h3>
 <p><code>rate</code> 作用于区间向量，得到区间内样本值的增长速率。</p>
 <p>对于 Counter 类型的数据，即监控样本值是根据时间的累计值，所得增长速率，也可以视为单位时间内的增量。</p>
